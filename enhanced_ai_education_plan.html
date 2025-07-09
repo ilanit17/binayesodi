@@ -21,6 +21,7 @@
             --subtle-gray: #f1f5f9;
             --success-color: #059669;
             --warning-color: #d97706;
+            --purple-accent: #7c3aed;
         }
 
         body {
@@ -126,7 +127,62 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* --- Rationale Section Styles --- */
+        /* --- General Sub-Navigation (Used in multiple sections) --- */
+        .sub-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            background: var(--subtle-gray);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .sub-nav-button {
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--dark-blue);
+            background-color: transparent;
+            border: 2px solid var(--accent-blue);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .sub-nav-button:hover {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+        .sub-nav-button.active {
+            background-color: var(--dark-blue);
+            color: var(--light-text);
+            border-color: var(--dark-blue);
+            transform: none;
+        }
+        
+        .sub-content-section { display: none; }
+        
+        .sub-content-section.active { display: block; }
+
+        .sub-content-section h2, #detailed-model h2 {
+            font-size: 2.2em;
+            color: var(--header-grad-start);
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--primary-blue);
+            padding-bottom: 15px;
+        }
+        
+        .sub-content-section h4 {
+            font-size: 1.3em;
+            color: var(--dark-blue);
+            margin-top: 25px;
+            border-bottom: 2px solid var(--subtle-gray);
+            padding-bottom: 10px;
+        }
+
+        /* --- STYLES FOR RATIONALE SECTION --- */
         #rationale .general-goal {
             margin: 20px 0;
             padding: 30px;
@@ -138,70 +194,7 @@
             line-height: 1.8;
             box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
         }
-
-        #rationale .sub-navigation {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            padding: 20px;
-            background: linear-gradient(135deg, var(--subtle-gray), #e2e8f0);
-            border-radius: 12px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        #rationale .sub-nav-button {
-            padding: 12px 24px;
-            font-size: 1em;
-            font-weight: 500;
-            color: var(--dark-blue);
-            background-color: var(--container-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        #rationale .sub-nav-button:hover {
-            background-color: var(--accent-blue);
-            color: var(--light-text);
-            transform: translateY(-1px);
-        }
-
-        #rationale .sub-nav-button.active {
-            background-color: var(--dark-blue);
-            color: var(--light-text);
-            border-color: var(--dark-blue);
-            box-shadow: 0 3px 8px rgba(30, 64, 175, 0.2);
-        }
-
-        #rationale .sub-content-section {
-            display: none;
-        }
-
-        #rationale .sub-content-section.active {
-            display: block;
-        }
-
-        #rationale h2 {
-            font-size: 2.2em;
-            color: var(--header-grad-start);
-            margin-bottom: 25px;
-            border-bottom: 3px solid var(--primary-blue);
-            padding-bottom: 15px;
-        }
-
-        #rationale h4 {
-            font-size: 1.4em;
-            color: var(--dark-blue);
-            margin-top: 30px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--subtle-gray);
-            padding-bottom: 10px;
-        }
-
-        #rationale .vision-box {
+        #rationale .vision-box, #rationale .leadership-decision-box {
             background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             padding: 25px;
             border-radius: 12px;
@@ -209,7 +202,16 @@
             border-right: 5px solid var(--primary-blue);
             box-shadow: 0 3px 10px rgba(59, 130, 246, 0.1);
         }
-
+        #rationale .leadership-decision-box {
+            background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+            border-right-color: var(--purple-accent);
+        }
+        #rationale .leadership-decision-box h4 {
+             color: #6d28d9;
+        }
+        #rationale .leadership-decision-box p, #rationale .leadership-decision-box li {
+            font-size: 1.05em;
+        }
         #rationale .principles-box {
             background: linear-gradient(135deg, #f8fafc, #f1f5f9);
             padding: 25px;
@@ -218,160 +220,20 @@
             border-right: 5px solid var(--accent-blue);
             box-shadow: 0 3px 10px rgba(96, 165, 250, 0.1);
         }
-
-        #rationale .principles-box strong {
-            color: var(--dark-blue);
-            font-size: 1.1em;
-        }
-
-        #rationale .principles-box ul {
-            margin-top: 15px;
-            margin-bottom: 0;
-        }
-
-        #rationale .principles-box li {
-            margin-bottom: 10px;
-            color: var(--dark-text);
-        }
-
-        #rationale .metrics-list {
-            list-style-type: none;
-            padding-right: 0;
-        }
-
-        #rationale .metrics-list li {
-            padding-right: 35px;
-            position: relative;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-
-        #rationale .metrics-list li::before {
-            content: "🎯";
-            position: absolute;
-            right: 0;
-            top: 0;
-            font-size: 1.3em;
-        }
-
-        #rationale .styled-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-            font-size: 1em;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        #rationale .styled-table thead tr {
-            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
-            color: var(--light-text);
-            text-align: right;
-            font-weight: 600;
-        }
-
-        #rationale .styled-table th,
-        #rationale .styled-table td {
-            padding: 15px 18px;
-            border: 1px solid var(--border-color);
-        }
-
-        #rationale .styled-table tbody tr:nth-of-type(even) {
-            background-color: var(--subtle-gray);
-        }
-
-        #rationale .styled-table tbody tr:hover {
-            background-color: #e0f2fe;
-            transition: background-color 0.2s ease;
-        }
-
-        #rationale .warning-box {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 30px;
-            border-right: 5px solid var(--warning-color);
-            box-shadow: 0 3px 10px rgba(217, 119, 6, 0.1);
-        }
-
-        #rationale .warning-box h4 {
-            color: #92400e;
-            margin-top: 0;
-            border-bottom: none;
-        }
-
-        #rationale .warning-box p {
-            color: #92400e;
-            margin-bottom: 0;
-            font-weight: 500;
-        }
-
-        #rationale .success-box {
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 30px;
-            border-right: 5px solid var(--success-color);
-            box-shadow: 0 3px 10px rgba(5, 150, 105, 0.1);
-        }
-
-        #rationale .success-box h4 {
-            color: #065f46;
-            margin-top: 0;
-            border-bottom: none;
-        }
-
-        #rationale .success-box ul {
-            margin: 0;
-            color: #065f46;
-        }
-
-        /* --- Sub-Navigation (Used in multiple sections) --- */
-        .sub-navigation {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 15px;
-            background-color: var(--subtle-gray);
-            border-radius: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .sub-nav-button {
-            padding: 10px 20px;
-            font-size: 1em;
-            font-weight: 500;
-            color: var(--dark-blue);
-            background-color: var(--container-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .sub-nav-button.active {
-            background-color: var(--dark-blue);
-            color: var(--light-text);
-        }
-        
-        .sub-content-section { display: none; }
-        
-        .sub-content-section h2, #detailed-model h1 {
-            font-size: 2.2em;
-            color: var(--header-grad-start);
-            margin-bottom: 20px;
-            border-bottom: 3px solid var(--primary-blue);
-            padding-bottom: 10px;
-        }
-        
-        .sub-content-section h4 {
-            font-size: 1.3em;
-            color: var(--dark-blue);
-            margin-top: 25px;
-            border-bottom: 2px solid var(--subtle-gray);
-            padding-bottom: 10px;
-        }
+        #rationale .principles-box strong { color: var(--dark-blue); font-size: 1.1em; }
+        #rationale .principles-box ul { margin-top: 15px; margin-bottom: 0; padding-right: 20px; }
+        #rationale .principles-box li { margin-bottom: 10px; color: var(--dark-text); }
+        #rationale .metrics-list { list-style-type: none; padding-right: 0; }
+        #rationale .metrics-list li { padding-right: 35px; position: relative; margin-bottom: 15px; font-size: 1.1em; line-height: 1.6; }
+        #rationale .metrics-list li::before { content: "🎯"; position: absolute; right: 0; top: 0; font-size: 1.3em; }
+        #rationale .styled-table { width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 1em; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-radius: 10px; overflow: hidden; }
+        #rationale .styled-table thead tr { background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue)); color: var(--light-text); text-align: right; font-weight: 600; }
+        #rationale .styled-table th, #rationale .styled-table td { padding: 15px 18px; border: 1px solid var(--border-color); }
+        #rationale .styled-table tbody tr:nth-of-type(even) { background-color: var(--subtle-gray); }
+        #rationale .styled-table tbody tr:hover { background-color: #e0f2fe; transition: background-color 0.2s ease; }
+        #rationale .success-box { background: linear-gradient(135deg, #d1fae5, #a7f3d0); padding: 25px; border-radius: 12px; margin-top: 30px; border-right: 5px solid var(--success-color); box-shadow: 0 3px 10px rgba(5, 150, 105, 0.1); }
+        #rationale .success-box h4 { color: #065f46; margin-top: 0; border-bottom: none; }
+        #rationale .success-box p, #rationale .success-box ul { margin: 0; padding-right: 20px; color: #065f46; }
 
         /* --- STYLES FOR 3 MISSIONS SECTION --- */
         #three-missions .metrics-list { list-style-type: none; padding-right: 0; }
@@ -394,38 +256,39 @@
         #three-missions .mission-1-row .status-in-progress { background-color: #dbeafe; color: #1e40af; border-color: #3b82f6; }
         #three-missions .mission-2-row .mission-cell { background-color: #d1fae5; border-right-color: #059669; }
         #three-missions .mission-2-row .status-in-progress { background-color: #d1fae5; color: #047857; border-color: #059669; }
-        #three-missions .mission-3-row .mission-cell { background-color: #f3e8ff; border-right-color: #7c3aed; }
-        #three-missions .mission-3-row .status-in-progress { background-color: #f3e8ff; color: #6d28d9; border-color: #7c3aed; }
+        #three-missions .mission-3-row .mission-cell { background-color: #f3e8ff; border-right-color: var(--purple-accent); }
+        #three-missions .mission-3-row .status-in-progress { background-color: #f3e8ff; color: #6d28d9; border-color: var(--purple-accent); }
         
         /* --- STYLES FOR DETAILED MODEL SECTION --- */
-        #detailed-model .phases-overview { display: flex; background: linear-gradient(135deg, var(--subtle-gray), #e2e8f0); padding: 20px; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        #detailed-model .phase-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); text-align: center; flex: 1; min-width: 200px; border-top: 4px solid; }
+        #detailed-model .phases-overview { display: flex; background: linear-gradient(135deg, var(--subtle-gray), #e2e8f0); padding: 20px; gap: 20px; flex-wrap: wrap; justify-content: center; border-radius: 12px; }
+        #detailed-model .phase-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.07); text-align: center; flex: 1; min-width: 200px; border-top: 4px solid; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        #detailed-model .phase-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         #detailed-model .phase-1 { border-top-color: #ef4444; } .phase-2 { border-top-color: #f59e0b; } .phase-3 { border-top-color: #3b82f6; } .phase-4 { border-top-color: #059669; }
         #detailed-model .phase-card h3 { color: var(--header-grad-start); margin-bottom: 10px; font-size: 1.2em; }
-        #detailed-model .phase-card p { color: #555; font-size: 0.9em; }
+        #detailed-model .phase-card p { color: #475569; font-size: 0.9em; }
         #detailed-model .gantt-container { padding: 20px 0; overflow-x: auto; }
         #detailed-model .gantt-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        #detailed-model .gantt-table th, #detailed-model .gantt-table td { border: 1px solid var(--border-color); padding: 8px 6px; text-align: right; }
-        #detailed-model .gantt-table thead th { background-color: var(--header-grad-start); color:var(--light-text); position: sticky; top: 0; z-index: 10; font-size: 0.85em; }
+        #detailed-model .gantt-table th, #detailed-model .gantt-table td { border: 1px solid var(--border-color); padding: 10px 8px; text-align: right; }
+        #detailed-model .gantt-table thead th { background-color: var(--header-grad-start); color:var(--light-text); position: sticky; top: 0; z-index: 10; font-size: 0.9em; }
         #detailed-model .phase-header { background-color: var(--subtle-gray); font-weight: bold; font-size: 1.1em; color: var(--header-grad-start); text-align: center; }
         #detailed-model .phase-1-bg { background-color: #fee2e2; } .phase-2-bg { background-color: #fef3c7; } .phase-3-bg { background-color: #dbeafe; } .phase-4-bg { background-color: #d1fae5; }
         #detailed-model .col-action { min-width: 300px; font-weight: 500; }
-        #detailed-model .col-responsible { color: #555; min-width: 120px; font-weight: 500; font-size: 0.9em; }
-        #detailed-model .col-deliverable { min-width: 200px; color: #666; font-size: 0.9em; }
-        #detailed-model .status-chip { display: inline-block; padding: 3px 8px; border-radius: 10px; font-size: 0.75em; font-weight: bold; color: white; white-space: nowrap; }
+        #detailed-model .col-responsible { color: #475569; min-width: 120px; font-weight: 500; font-size: 0.9em; }
+        #detailed-model .col-deliverable { min-width: 200px; color: #64748b; font-size: 0.9em; }
+        #detailed-model .status-chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.8em; font-weight: 700; color: white; white-space: nowrap; }
         #detailed-model .status-completed { background-color: var(--success-color); } .status-progress { background-color: var(--primary-blue); } .status-planned { background-color: #6b7280; } .status-critical { background-color: #ef4444; }
-        #detailed-model .date-cell { background-color: var(--subtle-gray); font-weight: 600; color: var(--header-grad-start); text-align: center; font-size: 0.8em; }
-        #detailed-model .implementation-levels { margin: 30px 0; background: var(--subtle-gray); padding: 25px; border-radius: 10px; border: 1px solid var(--border-color); }
+        #detailed-model .date-cell { background-color: #e2e8f0; font-weight: 600; color: var(--header-grad-start); text-align: center; font-size: 0.8em; }
+        #detailed-model .implementation-levels { margin: 30px 0; background: var(--subtle-gray); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
         #detailed-model .implementation-levels h3 { color: var(--header-grad-start); margin-bottom: 20px; font-size: 1.4em; text-align: center; }
-        #detailed-model .levels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        #detailed-model .level-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-right: 4px solid; }
+        #detailed-model .levels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        #detailed-model .level-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-right: 5px solid; }
         #detailed-model .level-meta { border-right-color: #ef4444; } .level-district { border-right-color: var(--primary-blue); } .level-school { border-right-color: var(--success-color); }
         #detailed-model .level-card h4 { color: var(--header-grad-start); margin-bottom: 15px; font-size: 1.1em; }
-        #detailed-model .level-card ul { margin: 0; padding-right: 20px; }
-        #detailed-model .level-card li { margin-bottom: 8px; color: #555; font-size: 0.9em; }
-        #detailed-model .summary-box { padding: 20px; margin: 30px 0; border-radius: 10px; border-right: 5px solid; }
-        #detailed-model .summary-box h3 { margin-bottom: 15px; }
-        #detailed-model .summary-box ul { margin: 0; padding-right: 20px; }
+        #detailed-model .level-card ul { margin: 0; padding-right: 20px; list-style-position: outside; }
+        #detailed-model .level-card li { margin-bottom: 8px; color: #475569; font-size: 0.9em; }
+        #detailed-model .summary-box { padding: 25px; margin: 30px 0; border-radius: 12px; border-right: 5px solid; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        #detailed-model .summary-box h3 { margin-top: 0; margin-bottom: 15px; }
+        #detailed-model .summary-box ul { margin: 0; padding-right: 20px; list-style-position: outside; }
         
         .footer { 
             text-align: center; 
@@ -447,7 +310,7 @@
         </header>
 
         <nav class="main-navigation">
-            <button class="main-nav-button active" data-target="rationale">רציונל ויעד כללי</button>
+            <button class="main-nav-button active" data-target="rationale">רציונל, עקרונות ויעדים</button>
             <button class="main-nav-button" data-target="three-missions">שלוש המשימות המרכזיות</button>
             <button class="main-nav-button" data-target="detailed-model">פירוט מודל ההטמעה</button>
         </nav>
@@ -456,10 +319,6 @@
             
             <!-- SECTION 1: Rationale -->
             <section id="rationale" class="main-content-section">
-                <div class="general-goal">
-                    <strong>יעד כללי:</strong> 60% ומעלה מתלמידי כיתות ד'-ו' ירכשו כשירות בינה מלאכותית ברמה בסיסית עד סוף שנת הלימודים תשפ"ו.
-                </div>
-
                 <nav class="sub-navigation">
                     <button class="sub-nav-button active" data-target="overview">סקירה כללית</button>
                     <button class="sub-nav-button" data-target="principles">עקרונות מובילים</button>
@@ -468,20 +327,21 @@
                 <div class="sub-content-wrapper">
                     <!-- סקירה כללית -->
                     <div id="overview" class="sub-content-section active">
-                        <h2>סקירה כללית</h2>
+                        <h2>סקירה כללית ויעדים</h2>
+                        <div class="general-goal">
+                            <strong>יעד כללי:</strong> 60% ומעלה מתלמידי כיתות ד'-ו' ירכשו כשירות בינה מלאכותית ברמה בסיסית עד סוף שנת 2025.
+                        </div>
                         
                         <h4>🌟 חזון התכנית</h4>
                         <div class="vision-box">
-                            פיתוח דור של לומדים המסוגלים להתמודד בהצלחה עם אתגרי העידן הדיגיטלי, תוך שימוש מושכל ואחראי בטכנולוגיות בינה מלאכותית
+                           <p>פיתוח דור של לומדים המסוגלים להתמודד בהצלחה עם אתגרי העידן הדיגיטלי, תוך שימוש מושכל, יוזם, יצירתי ואחראי בטכנולוגיות בינה מלאכותית.</p>
                         </div>
 
                         <h4>🎯 רציונל המהלך</h4>
                         <ul class="metrics-list">
-                            <li><strong>המהפכה הטכנולוגית בחינוך:</strong> התפתחות מואצת של טכנולוגיות AI בכל תחומי החיים והשפעה גוברת על תהליכי למידה והוראה מחייבת התאמת מערכת החינוך למציאות המשתנה.</li>
-                            <li><strong>מגמות עולמיות:</strong> שילוב AI בתוכניות לימודים במדינות מובילות, דגש על פיתוח מיומנויות המאה ה-21, וחשיבות האוריינות הטכנולוגית בעולם העבודה העתידי.</li>
-                            <li><strong>חדשנות טכנו-פדגוגית:</strong> קידום החדשנות הטכנו-פדגוגית במערכת החינוך הישראלית באמצעות הטמעת כלי בינה מלאכותית מתקדמים המותאמים לצרכי התלמידים והמורים.</li>
-                            <li><strong>שיתוף פעולה בין-תחומי:</strong> יצירת שיתופי פעולה בין תחומים ואגפים שונים להשגת היעד באופן מוצלח יותר ובניית מודל בר-קיימא.</li>
-                            <li><strong>השגת יעד מדיד:</strong> מיקוד במטרה ברורה ומדידה - השגת 60% ומעלה מתלמידי כיתות ד'-ו' שירכשו כשירות בינה מלאכותית ברמה בסיסית עד דצמבר 2025.</li>
+                            <li><strong>התאמה לעידן הדיגיטלי:</strong> התפתחות מואצת של טכנולוגיות AI מחייבת התאמת מערכת החינוך למציאות המשתנה והקניית מיומנויות רלוונטיות.</li>
+                            <li><strong>חדשנות טכנו-פדגוגית:</strong> קידום החדשנות במערכת החינוך הישראלית באמצעות הטמעת כלים מתקדמים המותאמים לצרכי התלמידים והמורים.</li>
+                            <li><strong>מיקוד במיומנויות ליבה:</strong> התמקדות בארבע מיומנויות חיוניות לשימוש נכון ויעיל ב-AI, תוך הבנת ההיבטים האתיים.</li>
                         </ul>
 
                         <h4>🎯 ארבע מיומנויות הליבה</h4>
@@ -490,19 +350,12 @@
                                 <tr><th>מיומנות</th><th>תיאור</th><th>יעדי למידה</th></tr>
                             </thead>
                             <tbody>
-                                <tr><td><strong>🔍 זיהוי מנגנוני AI</strong></td><td>יכולת לזהות ולהבין כיצד פועלים מערכות בינה מלאכותית בסביבה היומיומית</td><td>הכרת טכנולוגיות AI בסביבה הקרובה, הבנת מנגנונים בסיסיים</td></tr>
-                                <tr><td><strong>⚙️ שימוש יעיל ומושכל</strong></td><td>פיתוח יכולת שימוש מושכל בכלי AI לפתרון בעיות ולמידה</td><td>התנסות מעשית עם כלי AI פשוטים, שימוש מתקדם למטרות למידה</td></tr>
-                                <tr><td><strong>🎨 שימוש יוזם ויוצר</strong></td><td>פיתוח יכולת יצירה והתנסות חדשנית עם כלי בינה מלאכותית</td><td>פיתוח פרויקטים עצמאיים, יצירה והתנסות חדשנית</td></tr>
-                                <tr><td><strong>⚖️ פעולה אתית</strong></td><td>הטמעת עקרונות אתיים בשימוש בטכנולוגיה והבנת השלכותיה</td><td>פיתוח מודעות לשימוש אחראי, הבנת השלכות אתיות ומוסריות</td></tr>
+                                <tr><td><strong>🔍 זיהוי מנגנוני AI</strong></td><td>יכולת לזהות ולהבין כיצד פועלים מערכות בינה מלאכותית בסביבה היומיומית</td><td>הכרת טכנולוגיות AI, הבנת מנגנונים בסיסיים</td></tr>
+                                <tr><td><strong>⚙️ שימוש יעיל ומושכל</strong></td><td>פיתוח יכולת שימוש מושכל בכלי AI לפתרון בעיות ולמידה</td><td>התנסות מעשית, שימוש מתקדם למטרות למידה</td></tr>
+                                <tr><td><strong>🎨 שימוש יוזם ויוצר</strong></td><td>פיתוח יכולת יצירה והתנסות חדשנית עם כלי בינה מלאכותית</td><td>פיתוח פרויקטים עצמאיים, יצירה והתנסות</td></tr>
+                                <tr><td><strong>⚖️ פעולה אתית</strong></td><td>הטמעת עקרונות אתיים בשימוש בטכנולוגיה והבנת השלכותיה</td><td>פיתוח מודעות, הבנת השלכות אתיות ומוסריות</td></tr>
                             </tbody>
                         </table>
-
-                        <div class="warning-box">
-                            <h4>⚠️ אתגר הזמן</h4>
-                            <p>
-                                <strong>יישום מלא של התכנית ב-6 חודשים בלבד</strong> - דורש ריכוז משאבים ומיקוד אינטנסיבי להשגת יעד 60% מהתלמידים עד דצמבר 2025.
-                            </p>
-                        </div>
                     </div>
 
                     <!-- עקרונות מובילים -->
@@ -513,10 +366,21 @@
                         <div class="principles-box">
                             <strong>עקרונות יסוד למודל ההטמעה המשותף:</strong>
                             <ul>
-                                <li>תהליך הטמעת כשירות בינה מלאכותית יתקיים בהובלת אגף הגיל</li>
-                                <li>הסתמכות על מומחיות וניסיון קיים באגפי הגיל במטה ובמחוזות</li>
-                                <li>שימוש במנגנונים ומבנים ארגוניים קיימים</li>
-                                <li>ממוני תקשוב במחוזות יהיו סוכני שינוי ושותפים מרכזיים</li>
+                                <li>תהליך הטמעת כשירות בינה מלאכותית יתקיים בהובלת אגף הגיל.</li>
+                                <li>הסתמכות על מומחיות וניסיון קיים באגפי הגיל במטה ובמחוזות.</li>
+                                <li>שימוש במנגנונים ומבנים ארגוניים קיימים.</li>
+                                <li>ממוני תקשוב במחוזות יהיו סוכני שינוי ושותפים מרכזיים.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="leadership-decision-box">
+                            <h4>🏛️ הובלת התהליך: האגף לחינוך יסודי</h4>
+                            <p> האגף לחינוך יסודי <strong>מוביל</strong> את המהלך ולא רק מתכלל אותו. האגף:</p>
+                            <ul>
+                                <li>קובע מדיניות מותאמת גיל.</li>
+                                <li>מדייק ערוצי הטמעה.</li>
+                                <li>מזהה ומסיר חסמים.</li>
+                                <li>מהווה כתובת מרכזית לכל השותפים הפועלים מולו.</li>
                             </ul>
                         </div>
 
@@ -533,24 +397,12 @@
                             </tbody>
                         </table>
 
-                        <h4>💎 הערך המוסף של המודל המשותף</h4>
-                        <ul class="metrics-list">
-                            <li><strong>גישה הוליסטית:</strong> שילוב היבטים טכנולוגיים, חברתיים ופדגוגיים בגישה מקיפה</li>
-                            <li><strong>ניצול מיטבי של משאבים:</strong> שימוש בכוח האדם והמומחיות הקיימים מכל התחומים</li>
-                            <li><strong>הטמעה עמוקה יותר:</strong> התייחסות לכל ההיבטים של הנושא בצורה משולבת</li>
-                            <li><strong>תמיכה רחבה:</strong> כל בית ספר מקבל תמיכה מכל התחומים בו-זמנית</li>
-                            <li><strong>קיימות ארוכת טווח:</strong> בניית תשתית ארגונית חזקה לעתיד</li>
-                            <li><strong>למידה משותפת:</strong> העשרה הדדית בין התחומים השונים</li>
-                        </ul>
-
                         <div class="success-box">
                             <h4>🚀 הצהרה אסטרטגית</h4>
-                            <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 15px;">
-                                <strong>מודל ההטמעה המשותף מהווה מהלך חדשני ופורץ דרך</strong> בהטמעת טכנולוגיות מתקדמות במערכת החינוך הישראלית.
-                                באמצעות <strong>שיתוף פעולה בין-אגפי</strong>, <strong>מיקוד בארבע מיומנויות הליבה</strong>, ו<strong>התאמה התפתחותית</strong> לשכבות הגיל השונות, 
-                                אנו בונים דור של לומדים מוכנים לעתיד הדיגיטלי.
+                            <p>
+                                <strong>מודל ההטמעה המשותף מהווה מהלך חדשני ופורץ דרך.</strong>
+                                באמצעות שיתוף פעולה בין-אגפי ומיקוד במיומנויות הליבה, אנו בונים דור של לומדים מוכנים לעתיד הדיגיטלי.
                             </p>
-                            <p style="font-style: italic; margin-bottom: 0; font-weight: 500;">זהו צעד משמעותי לקראת מערכת חינוך מתקדמת, רלוונטית ומובילה עולמית.</p>
                         </div>
                     </div>
                 </div>
@@ -657,16 +509,16 @@
             
             <!-- SECTION 3: Detailed Implementation Model -->
             <section id="detailed-model" class="main-content-section">
-                <h1>מודל הטמעת בינה מלאכותית בחינוך</h1>
                 <nav class="sub-navigation" id="detailed-model-nav">
                     <button class="sub-nav-button active" data-target="model-overview">סקירה כללית</button>
+                    <button class="sub-nav-button" data-target="model-structure">מבנה ארגוני וקהלי יעד</button>
                     <button class="sub-nav-button" data-target="model-gantt">לוח גאנט מפורט</button>
-                    <button class="sub-nav-button" data-target="model-structure">מבנה וקהלי יעד</button>
                     <button class="sub-nav-button" data-target="model-summary">סיכום ואתגרים</button>
                 </nav>
 
                 <div class="sub-content-wrapper">
                     <div id="model-overview" class="sub-content-section">
+                        <h2>סקירת שלבי מודל ההטמעה</h2>
                         <div class="phases-overview">
                             <div class="phase-card phase-1"><h3>שלב 1: היערכות מטה</h3><p>יולי-אוגוסט: בניית צוות הטמעה ומודל הפעלה</p></div>
                             <div class="phase-card phase-2"><h3>שלב 2: פיתוח מודל משותף</h3><p>ספטמבר: בניית מודל הטמעה משותף ופיתוח תכנים</p></div>
@@ -676,60 +528,78 @@
                     </div>
 
                     <div id="model-gantt" class="sub-content-section">
+                        <h2>לוח גאנט מפורט - מודל ההטמעה</h2>
                         <div class="gantt-container">
                             <table class="gantt-table">
                                <thead><tr><th>פעולות מרכזיות</th><th>אחריות</th><th>תוצרים/מטרות</th><th>סטטוס</th><th>יולי</th><th>אוגוסט</th><th>ספטמבר</th><th>אוקטובר</th><th>נובמבר</th><th>דצמבר</th></tr></thead>
                                <tbody>
                                    <tr class="phase-1-bg"><td colspan="10" class="phase-header">שלב 1: היערכות מטה - בניית תשתית ארגונית</td></tr>
-                                   <tr><td class="col-action">הקמת צוות הטמעה מטה</td><td class="col-responsible">מנה"פ אגף יסודי</td><td class="col-deliverable">צוות הטמעה פעיל</td><td><span class="status-chip status-completed">הושלם</span></td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td><td></td></tr>
-                                   <tr><td class="col-action">בניית תפיסת הטמעה ומודל הפעלה</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">מסמך תפיסה מאושר</td><td><span class="status-chip status-progress">בתהליך</span></td><td class="date-cell">✓</td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td></tr>
-                                   <tr><td class="col-action">קביעת מועדים לסדירויות</td><td class="col-responsible">מנה"פ אגף יסודי</td><td class="col-deliverable">לו"ז מפורט</td><td><span class="status-chip status-completed">הושלם</span></td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td><td></td></tr>
-                                   <tr><td class="col-action">פגישת התנעה עם צוות המטה</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">מצגת הסברה</td><td><span class="status-chip status-completed">הושלם</span></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td></tr>
-                                   <tr class="phase-2-bg"><td colspan="10" class="phase-header">שלב 2: פיתוח מודל הטמעה משותף</td></tr>
-                                   <tr><td class="col-action">פגישות תיאום לבניית שותפות</td><td class="col-responsible">אגף יסודי + יישומי טכ'</td><td class="col-deliverable">מסמך שותפות מאושר</td><td><span class="status-chip status-progress">בתהליך</span></td><td></td><td class="date-cell">מפגש 1</td><td class="date-cell">מפגש 2</td><td></td><td></td><td></td></tr>
-                                   <tr><td class="col-action">הקמת צוות פיתוח משותף</td><td class="col-responsible">נציגי אגפים</td><td class="col-deliverable">צוות פיתוח פעיל</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td></tr>
-                                   <tr><td class="col-action">בניית מודל הכשרה לצוות מחוזי</td><td class="col-responsible">צוות פיתוח</td><td class="col-deliverable">מודל הכשרה</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
-                                   <tr><td class="col-action">פיתוח מודל צוות הטמעה בית ספרי</td><td class="col-responsible">צוות פיתוח</td><td class="col-deliverable">מבנה צוות בית ספרי</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
-                                   <tr><td class="col-action">פיתוח תכנים ומתודולוגיה</td><td class="col-responsible">צוות פיתוח</td><td class="col-deliverable">חומרי הכשרה משולבים</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td class="date-cell">1-2</td><td class="date-cell">3-4</td><td class="date-cell">גימור</td><td></td><td></td></tr>
-                                   <tr><td class="col-action">הגדרת תהליכי עבודה במחוזות</td><td class="col-responsible">צוות פיתוח</td><td class="col-deliverable">מדריך תהליכי עבודה</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
-                                   <tr><td class="col-action">אישור סופי של המודל המשותף</td><td class="col-responsible">אגף יסודי + יישומי טכ'</td><td class="col-deliverable">מודל מאושר</td><td><span class="status-chip status-critical">קריטי</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">הקמת צוות הטמעה מטה</td><td class="col-responsible">מנה"פ אגף יסודי</td><td class="col-deliverable">צוות הטמעה פעיל מטעם המטה</td><td><span class="status-chip status-completed">הושלם</span></td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">בניית תפיסת הטמעה ומודל הפעלה</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">מסמך תפיסת הטמעה מאושר</td><td><span class="status-chip status-progress">בתהליך</span></td><td class="date-cell">✓</td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">קביעת מועדים לסדירויות</td><td class="col-responsible">מנה"פ אגף יסודי</td><td class="col-deliverable">לוח זמנים מפורט לפגישות ועדכון</td><td><span class="status-chip status-completed">הושלם</span></td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">פגישת התנעה עם צוות המטה</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">מצגת הסברה - עיקרי התכנית</td><td><span class="status-chip status-completed">הושלם</span></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td></tr>
+                                   <tr class="phase-2-bg"><td colspan="10" class="phase-header">שלב 2: פיתוח מודל הטמעה משותף - שיתוף פעולה בין-אגפי</td></tr>
+                                   <tr><td class="col-action">פגישות תיאום לבניית תפיסת השותפות</td><td class="col-responsible">אגף יסודי + חטיבת יישומי טכנולוגיה</td><td class="col-deliverable">מסמך תפיסת שותפות מאושר בין כל הגורמים</td><td><span class="status-chip status-progress">בתהליך</span></td><td></td><td class="date-cell">מפגש 1</td><td class="date-cell">מפגש 2</td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">הקמת צוות פיתוח משותף</td><td class="col-responsible">נציגי חטיבת יישומי טכנולוגיה + יחידת חינוך חברתי + יחידת מינהל בית ספרי</td><td class="col-deliverable">צוות פיתוח פעיל עם נציגים מכל התחומים</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">בניית מודל הכשרה משולב לצוות המחוזי</td><td class="col-responsible">צוות פיתוח משותף</td><td class="col-deliverable">מודל הכשרה לממוני תקשוב + מדריכות חינוך חברתי + רכזות פדגוגיות</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">פיתוח מודל צוות הטמעה בית ספרי משולב</td><td class="col-responsible">צוות פיתוח משותף</td><td class="col-deliverable">מבנה צוות: רכז תקשוב + רכז חינוך חברתי + רכזת פדגוגית</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">פיתוח תכנים ומתודולוגיה משותפת</td><td class="col-responsible">צוות פיתוח משותף - מפגשי עבודה שבועיים</td><td class="col-deliverable">חומרי הכשרה משולבים הכוללים היבטים טכנולוגיים, חברתיים ופדגוגיים</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td class="date-cell">מפגש 1-2</td><td class="date-cell">מפגש 3-4</td><td class="date-cell">גימור</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">הגדרת תהליכי עבודה משותפים במחוזות</td><td class="col-responsible">צוות פיתוח משותף</td><td class="col-deliverable">מדריך תהליכי עבודה לשיתוף פעולה בין ממוני תקשוב למדריכות חינוך חברתי</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">בניית מערך הכשרה לקהלי יעד</td><td class="col-responsible">צוות פיתוח משותף</td><td class="col-deliverable">תכניות הכשרה מותאמות: מפקחים, מנהלים, מדריכות, רכזות, מורות</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
+                                   <tr><td class="col-action">אישור סופי של המודל המשותף</td><td class="col-responsible">אגף יסודי + חטיבת יישומי טכנולוגיה</td><td class="col-deliverable">מודל הטמעה משותף מאושר וכן להטמעה</td><td><span class="status-chip status-critical">קריטי</span></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td><td></td></tr>
                                    <tr class="phase-3-bg"><td colspan="10" class="phase-header">שלב 3: הטמעה מחוזית והכשרת גורמים</td></tr>
-                                   <tr><td class="col-action">מפגש אישי עם כל מחוז לבניית ת"ע</td><td class="col-responsible">צוות מטה</td><td class="col-deliverable">ת"ע מותאמת למחוז</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
-                                   <tr><td class="col-action">הצגת המודל למדריכות</td><td class="col-responsible">צוות מטה + ממונים</td><td class="col-deliverable">מדריכות מוכנות להטמעה</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
-                                   <tr><td class="col-action">הפצת איגרת למנהלים</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">איגרת הסבר למנהלים</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
-                                   <tr><td class="col-action">פרסום המהלך</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">חשיפה ציבורית</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td class="date-cell">✓</td><td class="date-cell">✓</td></tr>
+                                   <tr><td class="col-action">מפגש אישי עם כל מחוז לבניית ת"ע</td><td class="col-responsible">אגף יסודי + חטיבת יישומי טכנולוגיה + יחידת חינוך חברתי</td><td class="col-deliverable">תכנית עבודה מותאמת לכל מחוז</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">תמיכה במחוזות בבניית תכנית</td><td class="col-responsible">צוות הטמעה משותף מטה</td><td class="col-deliverable">תכניות עבודה מחוזיות מפורטות</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">סדירויות מטה-מחוז צוות הטמעה</td><td class="col-responsible">מנה"פ</td><td class="col-deliverable">מפגשי עדכון וליווי קבועים</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td class="date-cell">מפגש 1</td><td class="date-cell">מפגש 2</td><td class="date-cell">מפגש 3</td><td class="date-cell">מפגש 4</td><td></td></tr>
+                                   <tr><td class="col-action">הצגת המודל למדריכות תקשוב וחינוך חברתי</td><td class="col-responsible">צוות הטמעה משותף + ממונים מחוזיים</td><td class="col-deliverable">מדריכות מוכנות להטמעה משולבת</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">חשיפת והטמעת התכנית ברמת מחוז - ציר מנהיגות</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">מפקחי בתי הספר מכירים את התכנית</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">הפצת איגרת למנהלי בתי הספר</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">איגרת הסבר ומצגת למנהלים</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">ימי למידה למפקחות כוללות במחוזות</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">מפקחות מוכנות להטמעה בכל שלבי הגיל</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">מפגשי חשיפה לצוות הרכזים המטמיעים</td><td class="col-responsible">מדריכות מחוזיות (תקשוב + חינוך חברתי + רכזות פדגוגיות)</td><td class="col-deliverable">רכזים בבתי הספר מוכנים ליישום משולב</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">הכנת איגרת למורה</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">חומרי הדרכה למורים</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td></td><td></td></tr>
+                                   <tr><td class="col-action">פרסום המהלך</td><td class="col-responsible">אגף יסודי</td><td class="col-deliverable">חשיפה ציבורית והסברה</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td class="date-cell">✓</td><td class="date-cell">✓</td></tr>
                                    <tr class="phase-4-bg"><td colspan="10" class="phase-header">שלב 4: יישום בשטח והשגת יעד</td></tr>
-                                   <tr><td class="col-action">יישום המודל בבתי הספר</td><td class="col-responsible">צוותי בי"ס</td><td class="col-deliverable">יישום מלא בבתי ספר</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td class="date-cell">✓</td><td class="date-cell">✓</td></tr>
-                                   <tr><td class="col-action">מעקב ובקרה אחר התקדמות</td><td class="col-responsible">צוות מטה</td><td class="col-deliverable">דוחות התקדמות</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td></td><td class="date-cell">✓</td><td class="date-cell">✓</td></tr>
-                                   <tr><td class="col-action">הערכה סופית והשגת יעד 60%</td><td class="col-responsible">אגף יסודי + CDO</td><td class="col-deliverable">דוח סיכום</td><td><span class="status-chip status-critical">קריטי</span></td><td></td><td></td><td></td><td></td><td></td><td class="date-cell">✓</td></tr>
+                                   <tr><td class="col-action">יישום המודל בבתי הספר - הטמעה משולבת</td><td class="col-responsible">צוותי הטמעה בית ספריים משולבים (תקשוב + חינוך חברתי + פדגוגיה)</td><td class="col-deliverable">יישום מלא של התכנית ברוב בתי הספר</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td class="date-cell">✓</td><td class="date-cell">✓</td><td class="date-cell">✓</td></tr>
+                                   <tr><td class="col-action">מעקב ובקרה אחר התקדמות במחוזות</td><td class="col-responsible">צוות הטמעה מטה</td><td class="col-deliverable">דוחות התקדמות חודשיים והערכת יעד 60%</td><td><span class="status-chip status-planned">מתוכנן</span></td><td></td><td></td><td></td><td></td><td class="date-cell">✓</td><td class="date-cell">✓</td></tr>
+                                   <tr><td class="col-action">הערכה סופית והשגת יעד 60% מהתלמידים</td><td class="col-responsible">אגף חינוך יסודי + צוות CDO</td><td class="col-deliverable">דוח סיכום והערכת הצלחת התכנית</td><td><span class="status-chip status-critical">קריטי</span></td><td></td><td></td><td></td><td></td><td></td><td class="date-cell">✓</td></tr>
                                </tbody>
                             </table>
                         </div>
                     </div>
 
                     <div id="model-structure" class="sub-content-section">
+                        <h2>מבנה ארגוני וקהלי יעד</h2>
                         <div class="implementation-levels">
                             <h3>רמות ההטמעה - מבנה ארגוני משולב</h3>
                             <div class="levels-grid">
-                                <div class="level-card level-meta"><h4>🏛️ רמת מטה</h4><ul><li><strong>צוות משותף:</strong> אגף יסודי + יישומי טכנולוגיה</li><li><strong>יחידות שותפות:</strong> חינוך חברתי + מינהל בית ספרי</li><li><strong>אחריות:</strong> פיתוח מודל, ליווי כללי</li></ul></div>
-                                <div class="level-card level-district"><h4>🌐 רמת מחוז</h4><ul><li><strong>צוות משותף:</strong> ממוני תקשוב + מדריכות ח"ח + רכזות פדגוגיות</li><li><strong>אחריות:</strong> התאמת מודל, הכשרת צוותים</li></ul></div>
-                                <div class="level-card level-school"><h4>🏫 רמת בית הספר</h4><ul><li><strong>צוות משולב:</strong> רכז תקשוב + רכז ח"ח + רכזת פדגוגית</li><li><strong>אחריות:</strong> יישום מהיר, השגת יעד 60%</li></ul></div>
+                                <div class="level-card level-meta"><h4>🏛️ רמת מטה - שיתוף פעולה בין-אגפי</h4><ul><li><strong>צוות הטמעה מטה משותף:</strong> אגף יסודי + חטיבת יישומי טכנולוגיה בחינוך</li><li><strong>יחידות שותפות:</strong> יחידת החינוך החברתי + יחידת המינהל הבית ספרי</li><li><strong>אחריות:</strong> פיתוח מודל משותף, קביעת תפיסה, ליווי כללי</li><li><strong>תפוקות:</strong> מסמכי מדיניות משותפים, חומרי הכשרה משולבים, מצגות הסברה</li><li><strong>תקופה:</strong> יולי-ספטמבר 2025 (היערכות ופיתוח מואץ)</li></ul></div>
+                                <div class="level-card level-district"><h4>🌐 רמת מחוז - צוות משולב</h4><ul><li><strong>צוות הטמעה מחוזי משותף:</strong> ממוני תקשוב + מדריכות חינוך חברתי + רכזות פדגוגיות מחוזיות</li><li><strong>אחריות:</strong> התאמת המודל למחוז, הכשרת צוותי בתי הספר</li><li><strong>תפוקות:</strong> תכניות עבודה מחוזיות משולבות, הכשרות אינטנסיביות לצוותים</li><li><strong>שיתוף פעולה:</strong> תיאום פעולות בין התחומים ברמת המחוז</li><li><strong>תקופה:</strong> אוקטובר 2025 (הכנה אינטנסיבית)</li></ul></div>
+                                <div class="level-card level-school"><h4>🏫 רמת בית הספר - צוות הטמעה משולב</h4><ul><li><strong>צוות הטמעה בית ספרי:</strong> רכז תקשוב + רכז חינוך חברתי + רכזת פדגוגית</li><li><strong>תמיכה:</strong> מדריכות מחוזיות משולבות + מפקחות + מוקד תמיכה</li><li><strong>אחריות:</strong> יישום מהיר של המודל, הכשרת מורים, השגת יעד 60%</li><li><strong>תפוקות:</strong> הטמעה פעילה מיידית, מעקב יומי אחר התקדמות</li><li><strong>שיתוף פעולה:</strong> עבודה משולבת של הרכזים בכל ההיבטים</li><li><strong>תקופה:</strong> נובמבר-דצמבר 2025 (יישום אינטנסיבי)</li></ul></div>
+                            </div>
+                        </div>
+                         <div class="implementation-levels">
+                            <h3>מנגנוני תמיכה ובקרה - מודל משותף</h3>
+                            <div class="levels-grid">
+                                <div class="level-card level-meta"><h4>📊 מעקב ובקרה משותף</h4><ul><li>מעקב אחר התקדמות בכל התחומים (נובמבר-דצמבר)</li><li>דוחות התקדמות שבועיים משולבים</li><li>מעקב רציף אחר מדדי תפוקה (60% מהתלמידים)</li><li>זיהוי מיידי של חסמים והתערבויות דחופות</li><li>תיאום בין כל הגורמים במטה ובמחוזות</li></ul></div>
+                                <div class="level-card level-district"><h4>🎯 תמיכה וליווי משולב</h4><ul><li>מוקד פניות טלפוני פעיל לכל התחומים</li><li>מומחים מלווים מכל התחומים לליווי מיידי</li><li>חומרי הדרכה משולבים מותאמים לזמן קצר</li><li>פורומים דיגיטליים לשיתוף ידע מהיר בין התחומים</li><li>הכשרות משולבות לצוותי בתי הספר</li></ul></div>
+                                <div class="level-card level-school"><h4>🎯 יעד סופי ומדידה - זמן קצר</h4><ul><li><strong>יעד מרכזי:</strong> 60% ומעלה מתלמידי כיתות ד'-ו' ירכשו כשירות בינה מלאכותית ברמה בסיסית עד סוף שנת 2025.</li><li><strong>מדידה:</strong> באמצעות הדשבורד המעודכן עם דיווח יומי במהלך נובמבר-דצמבר</li><li><strong>מעקב אינטנסיבי:</strong> דיווח שבועי למפקחי בתי הספר, זיהוי מיידי של פערים</li><li><strong>התערבויות דחופות:</strong> תמיכה מיידית לבתי ספר המתקשים</li><li><strong>⚠️ אתגר זמן:</strong> יישום מלא של התכנית ב-6 חודשים בלבד - דורש ריכוז משאבים ומיקוד אינטנסיבי</li></ul></div>
                             </div>
                         </div>
                         <div class="implementation-levels">
                             <h3>קהלי יעד והכשרות - מודל משולב</h3>
                             <div class="levels-grid">
-                                <div class="level-card level-meta"><h4>👥 דרג ניהולי ופיקוח</h4><ul><li><strong>קהל:</strong> מפקחים, מנהלים</li><li><strong>הכשרה:</strong> ימי למידה, איגרות, מצגות</li></ul></div>
-                                <div class="level-card level-district"><h4>🎓 צוותי הדרכה מחוזיים</h4><ul><li><strong>קהל:</strong> מדריכות תקשוב, ח"ח ופדגוגיה</li><li><strong>הכשרה:</strong> מפגשים משולבים</li></ul></div>
-                                <div class="level-card level-school"><h4>🏫 צוותי בתי הספר</h4><ul><li><strong>קהל:</strong> רכזים, מורים</li><li><strong>הכשרה:</strong> חשיפה, איגרת, ליווי</li></ul></div>
+                                <div class="level-card level-meta"><h4>👥 דרג ניהולי ופיקוח</h4><ul><li><strong>מפקחים כוללים:</strong> הכרת התכנית והטמעתה בבתי הספר</li><li><strong>מנהלי בתי ספר:</strong> הובלת התכנית ברמת בית הספר</li><li><strong>הכשרה:</strong> ימי למידה מחוזיים + איגרות הסבר + מצגות</li><li><strong>תמיכה:</strong> ליווי רציף ומעקב אחר יישום</li></ul></div>
+                                <div class="level-card level-district"><h4>🎓 צוותי הדרכה מחוזיים</h4><ul><li><strong>מדריכות תקשוב מחוזיות:</strong> הדרכה בהיבטים הטכנולוגיים</li><li><strong>מדריכות חינוך חברתי מחוזיות:</strong> הדרכה בהיבטי הערכים והלכידות</li><li><strong>רכזות פדגוגיות מחוזיות:</strong> הדרכה בהיבטים הפדגוגיים</li><li><strong>הכשרה משותפת:</strong> מפגשי הכנה משולבים לפני ההטמעה</li><li><strong>תפקיד:</strong> הדרכת הרכזים בבתי הספר בגישה משולבת</li></ul></div>
+                                <div class="level-card level-school"><h4>🏫 צוותי בתי הספר</h4><ul><li><strong>רכזי תקשוב:</strong> אחראים על ההיבטים הטכנולוגיים</li><li><strong>רכזי חינוך חברתי:</strong> אחראים על היבטי הערכים והלכידות</li><li><strong>רכזות פדגוגיות:</strong> אחראיות על ההיבטים הפדגוגיים</li><li><strong>צוות המורות:</strong> יישום התכנית בכיתות ד'-ו'</li><li><strong>הכשרה:</strong> מפגשי חשיפה + איגרת למורה + ליווי רציף</li><li><strong>יעד:</strong> השגת 60% מהתלמידים עד דצמבר 2025</li></ul></div>
                             </div>
                         </div>
                     </div>
 
                     <div id="model-summary" class="sub-content-section">
-                        <div class="summary-box" style="background: #fef3c7; border-color: var(--warning-color);"><h3 style="color: #92400e;">⚠️ אתגרים מרכזיים</h3><ul style="color: #92400e;"><li>לו"ז צפוף: 6 חודשים ליישום מלא.</li><li>היקף רחב: כלל בתי הספר היסודיים.</li><li>מורכבות ארגונית: תיאום בין-אגפי ובין-רובדי.</li></ul></div>
-                        <div class="summary-box" style="background: #d1fae5; border-color: var(--success-color);"><h3 style="color: #065f46;">✅ גורמי הצלחה קריטיים</h3><ul style="color: #065f46;"><li>מחויבות הנהלה ותקשורת ברורה.</li><li>שיתוף פעולה אפקטיבי בין כל הגורמים.</li><li>מעקב צמוד, גמישות ותמיכה טכנולוגית.</li></ul></div>
-                        <div class="summary-box" style="background: #dbeafe; border-color: var(--primary-blue);"><h3 style="color: var(--dark-blue);">🤝 יתרונות המודל המשותף</h3><ul style="color: var(--dark-blue);"><li>גישה הוליסטית המשלבת טכנולוגיה, פדגוגיה וערכים.</li><li>ניצול מיטבי של משאבים והטמעה עמוקה.</li><li>בניית תשתית ארגונית חזקה וקיימות ארוכת טווח.</li></ul></div>
+                        <h2>סיכום, גורמי הצלחה ואתגרים</h2>
+                        <div class="summary-box" style="background-color: #e6f4ea; border-right-color: #34a853;"><h3 style="color: #1e4620;">✅ גורמי הצלחה קריטיים - מודל משותף</h3><ul style="color: #1e4620;"><li><strong>מחויבות הנהלה:</strong> תמיכה מלאה מכל הדרגים ומכל התחומים</li><li><strong>תקשורת ברורה:</strong> מסרים אחידים וברורים לכל השותפים מכל התחומים</li><li><strong>שיתוף פעולה אפקטיבי:</strong> תיאום הדוק בין חטיבת יישומי טכנולוגיה, חינוך חברתי ומינהל בית ספרי</li><li><strong>מעקב צמוד:</strong> דיווח יומי ותגובה מהירה לחסמים בכל התחומים</li><li><strong>גמישות ביישום:</strong> התאמות מהירות בהתאם לצרכי השטח</li><li><strong>תמיכה טכנולוגית:</strong> כלים דיגיטליים למעקב ותמיכה משולבת</li><li><strong>הכשרות משולבות:</strong> הכנת כל הגורמים לעבודה משותפת ואפקטיבית</li></ul></div>
+                        <div class="summary-box" style="background-color: #e8f0fe; border-right-color: #4285f4;"><h3 style="color: #1a0dab;">🤝 יתרונות המודל המשותף</h3><ul style="color: #1a0dab;"><li><strong>גישה הוליסטית:</strong> שילוב היבטים טכנולוגיים, חברתיים ופדגוגיים</li><li><strong>ניצול מיטבי של משאבים:</strong> שימוש בכוח האדם והמומחיות הקיימים</li><li><strong>הטמעה עמוקה יותר:</strong> התייחסות לכל ההיבטים של הנושא</li><li><strong>תמיכה רחבה:</strong> כל בית ספר מקבל תמיכה מכל התחומים</li><li><strong>קיימות ארוכת טווח:</strong> בניית תשתית ארגונית חזקה לעתיד</li><li><strong>למידה משותפת:</strong> העשרה הדדית בין התחומים השונים</li></ul></div>
+                        <div class="summary-box" style="background-color: #fce8e6; border-right-color: #ea4335;"><h3 style="color: #a50e0e;">⚠️ אתגרים מרכזיים - מודל משותף</h3><ul style="color: #a50e0e;"><li><strong>לוח זמנים צפוף:</strong> 6 חודשים בלבד ליישום מלא של מודל משותף</li><li><strong>היקף רחב:</strong> הטמעה בכל בתי הספר היסודיים בישראל</li><li><strong>מורכבות ארגונית:</strong> תיאום בין מטה, מחוזות ובתי ספר + תיאום בין תחומים</li><li><strong>שיתוף פעולה בין-אגפי:</strong> צורך בתיאום הדוק בין חטיבת יישומי טכנולוגיה, חינוך חברתי ומינהל בית ספרי</li><li><strong>הכשרת צוותים משולבים:</strong> צורך בהכשרה של צוותים לעבודה משותפת</li><li><strong>דרישת משאבים:</strong> הכשרות אינטנסיביות ותמיכה רציפה לכל התחומים</li></ul></div>
                     </div>
                 </div>
             </section>
@@ -772,60 +642,51 @@
                 button.addEventListener('click', () => showMainSection(button.dataset.target));
             });
             
-            function setupSubNavigation(navId) {
-                const subNav = document.getElementById(navId);
-                if (!subNav) return;
+            function showSubSection(navIdOrSectionId, targetId) {
+                let navContainer, contentContainer, subButtons, subSections;
                 
-                const subNavButtons = subNav.querySelectorAll('.sub-nav-button');
-                subNavButtons.forEach(button => {
-                    button.addEventListener('click', () => showSubSection(navId, button.dataset.target));
-                });
-            }
-
-            function setupRationaleNavigation() {
-                const rationaleSubNavButtons = document.querySelectorAll('#rationale .sub-nav-button');
-                rationaleSubNavButtons.forEach(button => {
-                    button.addEventListener('click', () => showSubSection('rationale', button.dataset.target));
-                });
-            }
-
-            function showSubSection(sectionId, targetId) {
-                if (sectionId === 'rationale') {
-                    // Handle rationale sub-navigation
+                if (navIdOrSectionId === 'rationale') {
                     const rationaleSection = document.getElementById('rationale');
-                    const subButtons = rationaleSection.querySelectorAll('.sub-nav-button');
-                    const subSections = rationaleSection.querySelectorAll('.sub-content-section');
-
-                    subSections.forEach(section => section.classList.remove('active'));
-                    subButtons.forEach(button => button.classList.remove('active'));
-
-                    const targetSection = document.getElementById(targetId);
-                    const activeButton = rationaleSection.querySelector(`[data-target="${targetId}"]`);
-
-                    if(targetSection) targetSection.classList.add('active');
-                    if(activeButton) activeButton.classList.add('active');
+                    navContainer = rationaleSection.querySelector('.sub-navigation');
+                    contentContainer = rationaleSection.querySelector('.sub-content-wrapper');
+                    subButtons = navContainer.querySelectorAll('.sub-nav-button');
+                    subSections = contentContainer.querySelectorAll('.sub-content-section');
                 } else {
-                    // Handle other sub-navigations
-                    const navContainer = document.getElementById(sectionId);
-                    const subButtons = navContainer.querySelectorAll('.sub-nav-button');
-                    const contentWrapper = navContainer.nextElementSibling;
-                    const subSections = contentWrapper.querySelectorAll('.sub-content-section');
+                    navContainer = document.getElementById(navIdOrSectionId);
+                    if (!navContainer) return;
+                    contentContainer = navContainer.nextElementSibling;
+                    subButtons = navContainer.querySelectorAll('.sub-nav-button');
+                    subSections = contentContainer.querySelectorAll('.sub-content-section');
+                }
 
-                    subSections.forEach(section => section.style.display = 'none');
-                    subButtons.forEach(button => button.classList.remove('active'));
+                subSections.forEach(section => {
+                    section.style.display = 'none';
+                    section.classList.remove('active');
+                });
+                subButtons.forEach(button => button.classList.remove('active'));
 
-                    const targetSection = document.getElementById(targetId);
-                    const activeButton = navContainer.querySelector(`[data-target="${targetId}"]`);
+                const targetSection = document.getElementById(targetId);
+                const activeButton = navContainer.querySelector(`[data-target="${targetId}"]`);
 
-                    if(targetSection) targetSection.style.display = 'block';
-                    if(activeButton) activeButton.classList.add('active');
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    targetSection.classList.add('active');
+                }
+                if (activeButton) {
+                    activeButton.classList.add('active');
                 }
             }
 
-            setupSubNavigation('missions-nav');
-            setupSubNavigation('detailed-model-nav');
-            setupRationaleNavigation();
+            // Setup all navigations
+            document.querySelectorAll('.sub-navigation').forEach(nav => {
+                const navId = nav.id;
+                const sectionId = nav.closest('.main-content-section').id;
+                nav.querySelectorAll('.sub-nav-button').forEach(button => {
+                    button.addEventListener('click', () => showSubSection(navId || sectionId, button.dataset.target));
+                });
+            });
 
+            // Initial call
             showMainSection('rationale');
         });
     </script>
