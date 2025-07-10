@@ -10,8 +10,7 @@
         :root {
             --main-bg: #f8fafc;
             --container-bg: #ffffff;
-            --header-grad-start: #1e293b;
-            --header-grad-end: #334155;
+            --header-blue: #3949AB; /* New specific blue */
             --primary-blue: #3b82f6;
             --dark-blue: #1e40af;
             --accent-blue: #60a5fa;
@@ -41,51 +40,52 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
-
+        
         .master-header {
-            background: linear-gradient(135deg, var(--header-grad-start), var(--header-grad-end));
+            background-color: var(--header-blue);
             color: var(--light-text);
-            padding: 40px;
+            padding: 25px 40px;
             text-align: center;
             position: relative;
         }
-
-        .master-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.1));
-            pointer-events: none;
-        }
-
+        
         .master-header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.8em;
+            margin: 0 0 5px 0;
+            font-size: 2.5em;
             font-weight: 700;
-            position: relative;
-            z-index: 1;
         }
         
         .master-header h3 {
             margin: 0;
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: 400;
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
         }
 
         /* --- Main Navigation --- */
         .main-navigation {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 15px;
             padding: 25px;
             background: linear-gradient(135deg, #f8fafc, #f1f5f9);
             border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .nav-logo {
+            flex-shrink: 0;
+        }
+
+        .nav-logo img {
+             max-height: 50px;
+        }
+
+        .nav-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
@@ -168,7 +168,7 @@
 
         .sub-content-section h2, #detailed-model h2 {
             font-size: 2.2em;
-            color: var(--header-grad-start);
+            color: var(--dark-text);
             margin-bottom: 25px;
             border-bottom: 3px solid var(--primary-blue);
             padding-bottom: 15px;
@@ -261,26 +261,26 @@
         #detailed-model .phase-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.07); text-align: center; flex: 1; min-width: 200px; border-top: 4px solid; transition: transform 0.2s ease, box-shadow 0.2s ease; }
         #detailed-model .phase-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         #detailed-model .phase-1 { border-top-color: #ef4444; } .phase-2 { border-top-color: #f59e0b; } .phase-3 { border-top-color: #3b82f6; } .phase-4 { border-top-color: #059669; }
-        #detailed-model .phase-card h3 { color: var(--header-grad-start); margin-bottom: 10px; font-size: 1.2em; }
+        #detailed-model .phase-card h3 { color: var(--dark-text); margin-bottom: 10px; font-size: 1.2em; }
         #detailed-model .phase-card p { color: #475569; font-size: 0.9em; }
         #detailed-model .gantt-container { padding: 20px 0; overflow-x: auto; }
         #detailed-model .gantt-table { width: 100%; border-collapse: collapse; font-size: 13px; }
         #detailed-model .gantt-table th, #detailed-model .gantt-table td { border: 1px solid var(--border-color); padding: 10px 8px; text-align: right; }
-        #detailed-model .gantt-table thead th { background-color: var(--header-grad-start); color:var(--light-text); position: sticky; top: 0; z-index: 10; font-size: 0.9em; }
-        #detailed-model .phase-header { background-color: var(--subtle-gray); font-weight: bold; font-size: 1.1em; color: var(--header-grad-start); text-align: center; }
+        #detailed-model .gantt-table thead th { background-color: var(--dark-text); color:var(--light-text); position: sticky; top: 0; z-index: 10; font-size: 0.9em; }
+        #detailed-model .phase-header { background-color: var(--subtle-gray); font-weight: bold; font-size: 1.1em; color: var(--dark-text); text-align: center; }
         #detailed-model .phase-1-bg { background-color: #fee2e2; } .phase-2-bg { background-color: #fef3c7; } .phase-3-bg { background-color: #dbeafe; } .phase-4-bg { background-color: #d1fae5; }
         #detailed-model .col-action { min-width: 300px; font-weight: 500; }
         #detailed-model .col-responsible { color: #475569; min-width: 120px; font-weight: 500; font-size: 0.9em; }
         #detailed-model .col-deliverable { min-width: 200px; color: #64748b; font-size: 0.9em; }
         #detailed-model .status-chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.8em; font-weight: 700; color: white; white-space: nowrap; }
         #detailed-model .status-completed { background-color: var(--success-color); } .status-progress { background-color: var(--primary-blue); } .status-planned { background-color: #6b7280; } .status-critical { background-color: #ef4444; }
-        #detailed-model .date-cell { background-color: #e2e8f0; font-weight: 600; color: var(--header-grad-start); text-align: center; font-size: 0.8em; }
+        #detailed-model .date-cell { background-color: #e2e8f0; font-weight: 600; color: var(--dark-text); text-align: center; font-size: 0.8em; }
         #detailed-model .implementation-levels { margin: 30px 0; background: var(--subtle-gray); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
-        #detailed-model .implementation-levels h3 { color: var(--header-grad-start); margin-bottom: 20px; font-size: 1.4em; text-align: center; }
+        #detailed-model .implementation-levels h3 { color: var(--dark-text); margin-bottom: 20px; font-size: 1.4em; text-align: center; }
         #detailed-model .levels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         #detailed-model .level-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-right: 5px solid; }
         #detailed-model .level-meta { border-right-color: #ef4444; } .level-district { border-right-color: var(--primary-blue); } .level-school { border-right-color: var(--success-color); }
-        #detailed-model .level-card h4 { color: var(--header-grad-start); margin-bottom: 15px; font-size: 1.1em; }
+        #detailed-model .level-card h4 { color: var(--dark-text); margin-bottom: 15px; font-size: 1.1em; }
         #detailed-model .level-card ul { margin: 0; padding-right: 20px; list-style-position: outside; }
         #detailed-model .level-card li { margin-bottom: 8px; color: #475569; font-size: 0.9em; }
         #detailed-model .summary-box { padding: 25px; margin: 30px 0; border-radius: 12px; border-right: 5px solid; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
@@ -302,14 +302,24 @@
 
     <div class="master-container">
         <header class="master-header">
-            <h1>תוכנית הטמעת בינה מלאכותית בחינוך היסודי</h1>
-            <h3>שנת תשפ"ו</h3>
+            <div class="header-title">
+                <h1>תוכנית הטמעת בינה מלאכותית בחינוך היסודי</h1>
+                <h3>שנת תשפ"ו</h3>
+            </div>
         </header>
 
         <nav class="main-navigation">
-            <button class="main-nav-button active" data-target="rationale">רציונל, עקרונות ויעדים</button>
-            <button class="main-nav-button" data-target="three-missions">משימות מרכזיות</button>
-            <button class="main-nav-button" data-target="detailed-model">פירוט מודל ההטמעה</button>
+            <div class="nav-logo">
+                <img src="logominhal.png" alt="לוגו מינהל החינוך">
+            </div>
+            <div class="nav-buttons-container">
+                 <button class="main-nav-button active" data-target="rationale">רציונל, עקרונות ויעדים</button>
+                 <button class="main-nav-button" data-target="three-missions">משימות מרכזיות</button>
+                 <button class="main-nav-button" data-target="detailed-model">פירוט מודל ההטמעה</button>
+            </div>
+            <div class="nav-logo">
+                 <img src="logohadshanut.png" alt="לוגו חדשנות טכנולוגית">
+            </div>
         </nav>
         
         <main class="main-content-area">
@@ -398,7 +408,7 @@
                 </div>
             </section>
 
-            <!-- SECTION 2: 3 Missions Plan -->
+            <!-- SECTION 2: Missions Plan -->
             <section id="three-missions" class="main-content-section">
                 <nav class="sub-navigation" id="missions-nav">
                     <button class="sub-nav-button active" data-target="mission-1-content">משימה 1: פיתוח הפלטפורמה</button>
@@ -471,7 +481,7 @@
                     </div>
                 
                     <div id="missions-gantt" class="sub-content-section">
-                        <h2>לוח גאנט - תוכנית עבודה (3 משימות)</h2>
+                        <h2>לוח גאנט - תוכנית עבודה (משימות מרכזיות)</h2>
                         <div style="overflow-x:auto;">
                             <table class="gantt-table">
                                 <thead><tr><th>משימה מרכזית</th><th>גורם אחראי</th><th>שותפים</th><th>פעולה</th><th>יוני</th><th>יולי</th><th>אוגוסט</th><th>ספטמבר</th><th>אוקטובר</th><th>נובמבר</th><th>דצמבר</th></tr></thead>
@@ -500,7 +510,7 @@
             <!-- SECTION 3: Detailed Implementation Model -->
             <section id="detailed-model" class="main-content-section">
                 <nav class="sub-navigation" id="detailed-model-nav">
-                    <button class="sub-nav-button active" data-target="model-overview">סקירה כללית</button>
+                    <button class="sub-nav-button" data-target="model-overview">סקירה כללית</button>
                     <button class="sub-nav-button" data-target="model-structure">מבנה ארגוני וקהלי יעד</button>
                     <button class="sub-nav-button" data-target="model-gantt">לוח גאנט מפורט</button>
                     <button class="sub-nav-button" data-target="model-summary">סיכום ואתגרים</button>
@@ -639,16 +649,15 @@
                     const rationaleSection = document.getElementById('rationale');
                     navContainer = rationaleSection.querySelector('.sub-navigation');
                     contentContainer = rationaleSection.querySelector('.sub-content-wrapper');
-                    subButtons = navContainer.querySelectorAll('.sub-nav-button');
-                    subSections = contentContainer.querySelectorAll('.sub-content-section');
                 } else {
                     navContainer = document.getElementById(navIdOrSectionId);
                     if (!navContainer) return;
                     contentContainer = navContainer.nextElementSibling;
-                    subButtons = navContainer.querySelectorAll('.sub-nav-button');
-                    subSections = contentContainer.querySelectorAll('.sub-content-section');
                 }
-
+                
+                subButtons = navContainer.querySelectorAll('.sub-nav-button');
+                subSections = contentContainer.querySelectorAll('.sub-content-section');
+                
                 subSections.forEach(section => {
                     section.style.display = 'none';
                     section.classList.remove('active');
@@ -676,8 +685,8 @@
                 });
             });
 
-            // Initial call
-            showMainSection('rationale');
+            // Initial call - updated to match the new button order from the image
+            showMainSection('detailed-model');
         });
     </script>
 </body>
