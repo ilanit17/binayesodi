@@ -166,7 +166,7 @@
         
         .sub-content-section.active { display: block; }
 
-        .sub-content-section h2, #detailed-model h2 {
+        .sub-content-section h2, #detailed-model h2, #partnerships h2 {
             font-size: 2.2em;
             color: var(--dark-text);
             margin-bottom: 25px;
@@ -174,7 +174,7 @@
             padding-bottom: 15px;
         }
         
-        .sub-content-section h4 {
+        .sub-content-section h4, #partnerships h4 {
             font-size: 1.3em;
             color: var(--dark-blue);
             margin-top: 25px;
@@ -226,11 +226,21 @@
         #rationale .metrics-list { list-style-type: none; padding-right: 0; }
         #rationale .metrics-list li { padding-right: 35px; position: relative; margin-bottom: 15px; font-size: 1.1em; line-height: 1.6; }
         #rationale .metrics-list li::before { content: "🎯"; position: absolute; right: 0; top: 0; font-size: 1.3em; }
-        #rationale .styled-table { width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 1em; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-radius: 10px; overflow: hidden; }
-        #rationale .styled-table thead tr { background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue)); color: var(--light-text); text-align: right; font-weight: 600; }
-        #rationale .styled-table th, #rationale .styled-table td { padding: 15px 18px; border: 1px solid var(--border-color); }
-        #rationale .styled-table tbody tr:nth-of-type(even) { background-color: var(--subtle-gray); }
-        #rationale .styled-table tbody tr:hover { background-color: #e0f2fe; transition: background-color 0.2s ease; }
+        #rationale .styled-table, #partnerships .styled-table {
+            width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 1em; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-radius: 10px; overflow: hidden;
+        }
+        #rationale .styled-table thead tr, #partnerships .styled-table thead tr {
+             background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue)); color: var(--light-text); text-align: right; font-weight: 600;
+        }
+        #rationale .styled-table th, #rationale .styled-table td, #partnerships .styled-table th, #partnerships .styled-table td {
+            padding: 15px 18px; border: 1px solid var(--border-color);
+        }
+        #rationale .styled-table tbody tr:nth-of-type(even), #partnerships .styled-table tbody tr:nth-of-type(even) {
+            background-color: var(--subtle-gray);
+        }
+        #rationale .styled-table tbody tr:hover, #partnerships .styled-table tbody tr:hover {
+            background-color: #e0f2fe; transition: background-color 0.2s ease;
+        }
         
         /* --- STYLES FOR 3 MISSIONS SECTION --- */
         #three-missions .metrics-list { list-style-type: none; padding-right: 0; }
@@ -275,14 +285,17 @@
         #detailed-model .status-chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.8em; font-weight: 700; color: white; white-space: nowrap; }
         #detailed-model .status-completed { background-color: var(--success-color); } .status-progress { background-color: var(--primary-blue); } .status-planned { background-color: #6b7280; } .status-critical { background-color: #ef4444; }
         #detailed-model .date-cell { background-color: #e2e8f0; font-weight: 600; color: var(--dark-text); text-align: center; font-size: 0.8em; }
-        #detailed-model .implementation-levels { margin: 30px 0; background: var(--subtle-gray); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
+        #detailed-model .implementation-levels, #partnerships .implementation-levels { margin: 30px 0; background: var(--subtle-gray); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
         #detailed-model .implementation-levels h3 { color: var(--dark-text); margin-bottom: 20px; font-size: 1.4em; text-align: center; }
-        #detailed-model .levels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        #detailed-model .level-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-right: 5px solid; }
-        #detailed-model .level-meta { border-right-color: #ef4444; } .level-district { border-right-color: var(--primary-blue); } .level-school { border-right-color: var(--success-color); }
-        #detailed-model .level-card h4 { color: var(--dark-text); margin-bottom: 15px; font-size: 1.1em; }
-        #detailed-model .level-card ul { margin: 0; padding-right: 20px; list-style-position: outside; }
-        #detailed-model .level-card li { margin-bottom: 8px; color: #475569; font-size: 0.9em; }
+        #detailed-model .levels-grid, #partnerships .levels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        #detailed-model .level-card, #partnerships .level-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-right: 5px solid; }
+        #detailed-model .level-meta, #partnerships .level-meta { border-right-color: #ef4444; }
+        #detailed-model .level-district, #partnerships .level-district { border-right-color: var(--primary-blue); }
+        #detailed-model .level-school, #partnerships .level-school { border-right-color: var(--success-color); }
+        #detailed-model .level-card h4, #partnerships .level-card h4 { color: var(--dark-text); margin-bottom: 15px; font-size: 1.1em; }
+        #detailed-model .level-card ul, #partnerships .level-card ul { margin: 0; padding-right: 20px; list-style-position: outside; }
+        #detailed-model .level-card li, #partnerships .level-card li { margin-bottom: 8px; color: #475569; font-size: 0.9em; }
+        #detailed-model .level-card p, #partnerships .level-card p { margin-bottom: 8px; color: #475569; font-size: 0.95em; line-height: 1.6; }
         #detailed-model .summary-box { padding: 25px; margin: 30px 0; border-radius: 12px; border-right: 5px solid; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
         #detailed-model .summary-box h3 { margin-top: 0; margin-bottom: 15px; }
         #detailed-model .summary-box ul { margin: 0; padding-right: 20px; list-style-position: outside; }
@@ -314,6 +327,7 @@
             </div>
             <div class="nav-buttons-container">
                  <button class="main-nav-button active" data-target="rationale">רציונל, עקרונות ויעדים</button>
+                 <button class="main-nav-button" data-target="partnerships">שותפים, מנגנונים וסדירויות</button>
                  <button class="main-nav-button" data-target="three-missions">משימות מרכזיות</button>
                  <button class="main-nav-button" data-target="detailed-model">פירוט מודל ההטמעה</button>
             </div>
@@ -604,6 +618,115 @@
                 </div>
             </section>
 
+            <!-- SECTION 4: PARTNERSHIPS - NEWLY ADDED SECTION -->
+            <section id="partnerships" class="main-content-section">
+                <h2>שותפים, מנגנונים וסדירויות</h2>
+                <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 30px;">הצלחת הטמעת בינה מלאכותית בחינוך היסודי מותנית גם בעבודת צוות משולבת ותיאום מדויק בין כל הרמות הארגוניות. המסמך מפרט את מבנה הסדירויות והשותפויות הנדרש להשגת יעד 60% מתלמידי כיתות ד'-ו'. הטמעת בינה מלאכותית בחינוך היסודי מחייבת תכלול רב-אגפי בין מטה, מחוזות ובתי ספר. העבודה מתבססת על עקרונות של תכלול רב-שבבתי המבטיח זרימת מידע רציפה ופעולה מתואמת בין כל השותפים.</p>
+
+                <h4>צוותי הטמעת בינה מלאכותית בחינוך היסודי</h4>
+                <table class="styled-table">
+                    <thead>
+                        <tr><th>צוות היגוי להטמעה בינה מלאכותית</th><th>צוות בינה מורחב</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align: top;">
+                                <ul style="padding-right: 20px;">
+                                    <li>חנה ללוש – מנהלת האגף לחינוך יסודי</li>
+                                    <li>חגית חזן – ממונה מיומנויות יסוד מובילה בינה מלאכותית</li>
+                                    <li>נעמי חזן – מנהל פדגוגי</li>
+                                    <li>אורית צאירי – ממונה חינוך חברתי ערכי</li>
+                                    <li>סיניה ברק – מתכללת STEM באגף היסודי</li>
+                                    <li>אילנית שוורץ – מדריכה ארצית בינה מלאכותית</li>
+                                    <li>רונית דרורי – מנח"ט אגף אקוסיסטם</li>
+                                    <li>מירב סרור – מנח"ט אגף אקוסיסטם</li>
+                                    <li>לימור ליבוביץ' – מנח"ט אגף אקוסיסטם</li>
+                                    <li>וונדי בירנבוים – חטיבת יישומי טכנולוגיה</li>
+                                </ul>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <ul style="padding-right: 20px;">
+                                    <li>מירי קיהן – מדריכה ארצית ב"ב</li>
+                                    <li>הדר מורד – מדריכה ארצית</li>
+                                    <li>אמירה חאין – ממונה החברה הערבית</li>
+                                    <li>קמילה ראדי – ב"מ חברה ערבית</li>
+                                    <li>סאוסן – החברה הדרוזית</li>
+                                    <li>אפרת מליק – מדריכה ארצית ממ"ד</li>
+                                    <li>אפרת אבידן – חטיבת יישומי טכנולוגיה</li>
+                                    <li>רונית אלוש – חטיבת יישומי טכנולוגיה</li>
+                                    <li>מירב ויצמן – מזה"פ</li>
+                                    <li>יפעת זקס – נציגת שפ"י</li>
+                                    <li>מיכל חלמיש – מדריכה ארצית בינה – חנ"מ</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="margin-top: 40px;">סדירויות ומפגשים</h4>
+                <div class="levels-grid" style="margin-top: 20px;">
+                    <div class="level-card level-district">
+                        <h4>צוות היגוי להטמעה בינה מלאכותית</h4>
+                        <p><strong>🕒 זמן:</strong> יום חמישי 11:00-12:00 (שבועי)</p>
+                        <p><strong>👥 משתתפים:</strong> צוות היגוי</p>
+                        <p><strong>🎯 מטרה:</strong> קבלת החלטות אסטרטגיות, מעקב כללי, פתרון בעיות מהותיות.</p>
+                    </div>
+                    <div class="level-card level-school">
+                        <h4>צוות מחוזי</h4>
+                        <p><strong>🕒 זמן:</strong> יום חמישי 8:00-9:00 (דו-שבועי)</p>
+                        <p><strong>👥 משתתפים:</strong> צוות אגף יסודי מצומצם, צוות תקשוב מטה, מפקחות מרכזות וממוני תקשוב.</p>
+                        <p><strong>🎯 מטרה:</strong></p>
+                        <ul style="padding-right: 15px;">
+                            <li>הצגת תוכנית עבודה</li>
+                            <li>מתן נתוני שימוש ומענים</li>
+                            <li>הנחיה שוטפת לחומרי הטמעה</li>
+                            <li>מעקב אחר ביצוע</li>
+                        </ul>
+                    </div>
+                    <div class="level-card level-meta">
+                        <h4>סדירויות משתנות</h4>
+                        <p><strong>מפקחות מרכזות:</strong></p>
+                        <p><strong>🕒 זמן:</strong> יום ראשון 15:00-15:30 (בתיאום מראש)</p>
+                        <p><strong>צוות פיתוח תכנים:</strong></p>
+                        <p><strong>🕒 זמן:</strong> יתואם</p>
+                    </div>
+                </div>
+
+                <h4 style="margin-top: 40px;">לוח גאנט – יולי 2025</h4>
+                <table class="styled-table">
+                    <thead><tr><th>תאריך</th><th>יום</th><th>שעה</th><th>פעילות</th><th>משתתפים</th></tr></thead>
+                    <tbody>
+                        <tr><td>3.7</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי להטמעה בינה מלאכותית</td><td>צוות היגוי מרכזי</td></tr>
+                        <tr><td>10.7</td><td>חמישי</td><td>8:00-9:00</td><td>מעקב מחוזי</td><td>צוות תקשוב + צוות אגף יסודי מצומצם</td></tr>
+                        <tr><td>10.7</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי להטמעה בינה מלאכותית</td><td>צוות היגוי מרכזי</td></tr>
+                        <tr><td>17.7</td><td>חמישי</td><td>8:00-9:00</td><td>מעקב מחוזי</td><td>צוות תקשוב + צוות אגף יסודי מצומצם</td></tr>
+                        <tr><td>17.7</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי להטמעה בינה מלאכותית</td><td>צוות היגוי מרכזי</td></tr>
+                        <tr><td>24.7</td><td>חמישי</td><td>8:00-9:00</td><td>מעקב מחוזי</td><td>צוות תקשוב + צוות אגף יסודי מצומצם</td></tr>
+                        <tr><td>24.7</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי להטמעה בינה מלאכותית</td><td>צוות היגוי מרכזי</td></tr>
+                        <tr><td>31.7</td><td>חמישי</td><td>8:00-9:00</td><td>מעקב מחוזי</td><td>צוות תקשוב + צוות אגף יסודי מצומצם</td></tr>
+                        <tr><td>31.7</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי + סיכום יולי</td><td>צוות היגוי מרכזי</td></tr>
+                    </tbody>
+                </table>
+    
+                <h4 style="margin-top: 40px;">לוח גאנט – אוגוסט 2025</h4>
+                <table class="styled-table">
+                    <thead><tr><th>תאריך</th><th>יום</th><th>שעה</th><th>פעילות</th><th>משתתפים</th></tr></thead>
+                    <tbody>
+                        <tr><td>7.8</td><td>חמישי</td><td>8:00-9:00</td><td>מעקב מחוזי</td><td>צוות תקשוב + צוות אגף יסודי מצומצם</td></tr>
+                        <tr><td>7.8</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי להטמעה בינה מלאכותית</td><td>צוות היגוי מרכזי</td></tr>
+                        <tr><td>14.8</td><td>חמישי</td><td>8:00-9:00</td><td>מעקב מחוזי</td><td>צוות תקשוב + צוות אגף יסודי מצומצם</td></tr>
+                        <tr><td>14.8</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי להטמעה בינה מלאכותית</td><td>צוות היגוי מרכזי</td></tr>
+                        <tr><td>21.8</td><td>חמישי</td><td>8:00-9:00</td><td>מעקב מחוזי</td><td>צוות תקשוב + צוות אגף יסודי מצומצם</td></tr>
+                        <tr><td>21.8</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי להטמעה בינה מלאכותית</td><td>צוות היגוי מרכזי</td></tr>
+                        <tr><td>28.8</td><td>חמישי</td><td>8:00-9:00</td><td>מעקב מחוזי</td><td>צוות תקשוב + צוות אגף יסודי מצומצם</td></tr>
+                        <tr><td>28.8</td><td>חמישי</td><td>11:00-12:00</td><td>צוות היגוי + הערכת חודש</td><td>צוות היגוי מרכזי</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="summary-box" style="background-color: #f5f3ff; border-right-color: var(--purple-accent); margin-top: 30px; text-align: center;">
+                    <p style="font-size: 1.1em; color: var(--dark-text);"><strong>הערה:</strong> צוות הטמעה מורחבת תקיים מפגש בימי חמישי 11:00-12:00 אחת לתקופה (מועד יתואם).</p>
+                </div>
+            </section>
         </main>
         
         <footer class="footer">
@@ -627,14 +750,13 @@
                 if (activeButton) activeButton.classList.add('active');
                 
                 // Activate first sub-section if it has sub-navigation
-                if (targetId === 'rationale') {
-                    showSubSection('rationale', 'overview');
-                }
-                if (targetId === 'three-missions') {
-                    showSubSection('missions-nav', 'mission-1-content');
-                }
-                if (targetId === 'detailed-model') {
-                    showSubSection('detailed-model-nav', 'model-overview');
+                if (targetSection && targetSection.querySelector('.sub-navigation')) {
+                    const firstSubButton = targetSection.querySelector('.sub-nav-button');
+                    if(firstSubButton) {
+                        const navIdOrSectionId = firstSubButton.closest('.main-content-section').id;
+                        const subTargetId = firstSubButton.dataset.target;
+                        showSubSection(navIdOrSectionId, subTargetId);
+                    }
                 }
             }
 
@@ -645,16 +767,14 @@
             function showSubSection(navIdOrSectionId, targetId) {
                 let navContainer, contentContainer, subButtons, subSections;
                 
-                if (navIdOrSectionId === 'rationale') {
-                    const rationaleSection = document.getElementById('rationale');
-                    navContainer = rationaleSection.querySelector('.sub-navigation');
-                    contentContainer = rationaleSection.querySelector('.sub-content-wrapper');
-                } else {
-                    navContainer = document.getElementById(navIdOrSectionId);
-                    if (!navContainer) return;
-                    contentContainer = navContainer.nextElementSibling;
-                }
+                const parentSection = document.getElementById(navIdOrSectionId);
+                if (!parentSection) return;
+
+                navContainer = parentSection.querySelector('.sub-navigation');
+                contentContainer = parentSection.querySelector('.sub-content-wrapper');
                 
+                if (!navContainer || !contentContainer) return;
+
                 subButtons = navContainer.querySelectorAll('.sub-nav-button');
                 subSections = contentContainer.querySelectorAll('.sub-content-section');
                 
@@ -676,17 +796,16 @@
                 }
             }
 
-            // Setup all navigations
+            // Setup all sub-navigations
             document.querySelectorAll('.sub-navigation').forEach(nav => {
-                const navId = nav.id;
                 const sectionId = nav.closest('.main-content-section').id;
                 nav.querySelectorAll('.sub-nav-button').forEach(button => {
-                    button.addEventListener('click', () => showSubSection(navId || sectionId, button.dataset.target));
+                    button.addEventListener('click', () => showSubSection(sectionId, button.dataset.target));
                 });
             });
 
-            // Initial call - updated to match the new button order from the image
-            showMainSection('detailed-model');
+            // Initial call - updated to show the first button as active on load.
+            showMainSection('rationale');
         });
     </script>
 </body>
