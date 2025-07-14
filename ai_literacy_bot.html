@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>בוט כשירות בינה מלאכותית - לכידות חברתית</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .scenario-intro {
+            background: #f8f9fa;
+            padding: 25px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .scenario-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 5px solid #4facfe;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .scenario-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scenario-content {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .discussion-points {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .discussion-points h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .discussion-points ul {
+            margin-right: 20px;
+        }
+
+        .discussion-points li {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .skills-nav {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+
+        .skill-btn {
+            flex: 1;
+            padding: 15px 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            color: #6c757d;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            min-width: 200px;
+        }
+
+        .skill-btn:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .skill-btn.active {
+            color: #4facfe;
+            border-bottom-color: #4facfe;
+            background: white;
+        }
+
+        .chat-container {
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            background: #f8f9fa;
+        }
+
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 18px 22px;
+            border-radius: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+            animation: fadeIn 0.5s ease-in;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .message.bot {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user {
+            background: #4facfe;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+            gap: 12px;
+        }
+
+        .input-box {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .input-box:focus {
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        .send-btn {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-container {
+            padding: 20px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .progress-label {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        .thinking-indicator {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(79, 172, 254, 0.1);
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .thinking-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4facfe;
+            animation: pulse 1.5s infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.5s; }
+        .dot:nth-child(3) { animation-delay: 1s; }
+
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            padding: 10px 16px;
+            background: rgba(79, 172, 254, 0.1);
+            border: 2px solid rgba(79, 172, 254, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            color: #4facfe;
+            font-weight: 500;
+        }
+
+        .quick-btn:hover {
+            background: #4facfe;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .task-highlight {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ff9800;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .task-highlight h3 {
+            color: #f57c00;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        @keyframes pulse {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1.2); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .skill-btn {
+                font-size: 12px;
+                padding: 12px 8px;
+                min-width: 150px;
+            }
+            
+            .message {
+                max-width: 90%;
+                padding: 15px 18px;
+            }
+
+            .chat-container {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 בוט כשירות בינה מלאכותית</h1>
+            <p>נושא: לכידות חברתית - "למה שנסבול בגללנו?"</p>
+        </div>
+
+        <div class="scenario-intro">
+            <div class="scenario-card">
+                <div class="scenario-title">
+                    🎬 הסיטואציה: בוקר גיבוש כיתתי
+                </div>
+                <div class="scenario-content">
+                    תלמידי הכיתה ארגנו בוקר של גיבוש כיתתי, כולל ארוחת בוקר מפנקת. אתמול ישבו ביחד וקבעו מה כל אחד מביא. כיוון שיש בכיתה תלמיד שרגיש לבוטנים, הוחלט להימנע ממבמבה. למרות ההחלטה, יום בא בבוקר עם במבה כי הוא אוהב במבה.
+                </div>
+                
+                <div class="discussion-points">
+                    <h4>🗣️ נושאים לדיון:</h4>
+                    <ul>
+                        <li>התחשבות בזולת - מה מחירה?</li>
+                        <li>צורכי הפרט מול צורכי הכלל</li>
+                        <li>האיזון בין הוויתור לבין העמידה על שלי</li>
+                        <li>איך טכנולוגיה יכולה לעזור בבעיות כאלה?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">
+                <span id="currentSkillLabel">מיומנות 1: זיהוי מנגנוני ב"מ</span>
+                <span id="progressText">0/12</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="skills-nav">
+            <button class="skill-btn active" data-skill="1">1. זיהוי מנגנוני ב"מ ואופן פעולתם</button>
+            <button class="skill-btn" data-skill="2">2. שימוש יעיל ומושכל בב"מ</button>
+            <button class="skill-btn" data-skill="3">3. שימוש יוזם ויוצר ערך בסיוע כלי ב"מ</button>
+            <button class="skill-btn" data-skill="4">4. תפקוד אתי בתחום הב"מ</button>
+        </div>
+
+        <div class="chat-container">
+            <div class="messages" id="messages"></div>
+            <div class="thinking-indicator" id="thinkingIndicator">
+                <div class="thinking-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <span>הבוט חושב על התשובה...</span>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input type="text" class="input-box" id="messageInput" placeholder="שתפו את המחשבות שלכם כאן...">
+            <button class="send-btn" id="sendBtn">שלח</button>
+        </div>
+    </div>
+
+    <script>
+        class AILiteracyBot {
+            constructor() {
+                this.currentSkill = 1;
+                this.currentStep = 0;
+                this.userProgress = {};
+                this.scenarios = {
+                    1: {
+                        title: "זיהוי מנגנוני בינה מלאכותית ואופן פעולתם",
+                        steps: [
+                            {
+                                message: "שלום! אני בוט שנוצר כדי לעזור לכם ללמוד על בינה מלאכותית דרך הסיטואציה של בוקר הגיבוש שלכם. 🤖\n\nלפני שנתחיל לחשוב על פתרונות, בואו נבין איך אני עובד. איך אני יודע לענות על השאלות שלכם? מה לדעתכם קורה 'מאחורי הקלעים' כשאני חושב על תשובה?",
+                                type: "understanding",
+                                task: "הסבירו איך לדעתכם בוט לומד ויודע לענות על שאלות",
+                                expectedConcepts: ["למידה מדוגמאות", "מידע", "אימון", "נתונים", "דפוסים"]
+                            },
+                            {
+                                message: "נהדר! עכשיו בואו נחבר את זה לסיטואציה שלכם. במקרה של הבמבה והתלמיד הרגיש לבוטנים - אילו מערכות בינה מלאכותית אתם מכירים שיכולות לעזור למנוע מצבים כאלה?\n\nחשבו על אפליקציות, מערכות התראות, או כלים דיגיטליים שיכולים לזכור מידע ולהזכיר לאנשים דברים חשובים.",
+                                type: "identification",
+                                task: "זהו לפחות 3 מערכות ב\"מ שיכולות לעזור בניהול אלרגיות או תיאום קבוצתי",
+                                expectedConcepts: ["אפליקציות תזכורות", "מערכות התראות", "יומן דיגיטלי", "רשימות משימות", "אפליקציות קבוצתיות"]
+                            },
+                            {
+                                message: "מעולה! בחרו אחת מהמערכות שהזכרתם. עכשיו נחשוב עמוק יותר - איזה מידע המערכת הזו צריכה כדי לעבוד טוב? איך היא תדע מתי להתריע? איך היא תבין מה מותר ומה אסור להביא?\n\nחשבו על כל הפרטים שאדם צריך לזכור במצב כזה, וכיצד המערכת תוכל ללמוד ולזכור אותם.",
+                                type: "analysis",
+                                task: "פרטו איזה מידע המערכת צריכה ואיך היא תשתמש בו כדי לקבל החלטות נכונות",
+                                expectedConcepts: ["רשימת אלרגיות", "רשימת תלמידים", "כללי בטיחות", "מועדי אירועים", "עדכונים"]
+                            }
+                        ]
+                    },
+                    2: {
+                        title: "שימוש יעיל ומושכל בבינה מלאכותית",
+                        steps: [
+                            {
+                                message: "כעת נלמד איך להשתמש בבינה מלאכותית בצורה חכמה! 🎯\n\nדמיינו שאתם רוצים לבקש ממני עזרה בפתרון הקונפליקט של יום עם הבמבה. איך תנסחו את השאלה כדי שאקבל את כל המידע הדרוש ואוכל לתת לכם עצה הכי טובה?\n\nחשבו מה חשוב לספר לי על המצב, על האנשים המעורבים, ועל מה שאתם מחפשים.",
+                                type: "communication",
+                                task: "נסחו שאלה מפורטת ומדויקת לבוט על איך לפתור את המצב עם יום והבמבה",
+                                expectedConcepts: ["הקשר מלא", "פרטי המצב", "מטרה ברורה", "רגשות מעורבים"]
+                            },
+                            {
+                                message: "מצוין! עכשיו, בואו נתרגל עם מצב אחר מהתוכן שלכם. ספרו לי על המצב של טל וירדן - החברות שתמיד אחת מהן מוותרת לטובת השנייה. נסחו שאלה ברורה שתעזור לכם להבין איך לעזור להן ליצור איזון טוב יותר ביחסים שלהן.",
+                                type: "practice",
+                                task: "תאמנו על ניסוח שאלה טובה למקרה של טל וירדן",
+                                expectedConcepts: ["איזון ביחסים", "גבולות", "תקשורת", "פשרות", "חברות בריאה"]
+                            },
+                            {
+                                message: "נהדר! עכשיו חלק מאוד חשוב - איך תדעו אם התשובה שנתתי לכם טובה ומועילה? לא כל מה שבוט אומר תמיד נכון או מתאים למצב שלכם.\n\nאילו דרכים יש לכם לבדוק אם העצה שלי נכונה? איך תחליטו אם כדאי לבצע את ההצעות שלי?",
+                                type: "evaluation",
+                                task: "פתחו לפחות 4 דרכים לבדוק ולהעריך את איכות התשובות מהבוט",
+                                expectedConcepts: ["שאילת מבוגרים", "בדיקת מקורות", "בדיקת היגיון", "ניסוי בזהירות", "קבלת דעות נוספות"]
+                            }
+                        ]
+                    },
+                    3: {
+                        title: "שימוש יוזם ויוצר ערך בסיוע כלי בינה מלאכותית",
+                        steps: [
+                            {
+                                message: "הגיע הזמן להיות יצירתיים ולהוביל! 🚀\n\nאתם רוצים ליצור פרויקט שישפר את הלכידות החברתית בכיתה שלכם ויעזור למנוע מצבים כמו זה של יום והבמבה. התפקיד שלכם: לתכנן פרויקט שמשלב בינה מלאכותית ויוצר ערך אמיתי לקהילת הכיתה.\n\nמה הפרויקט שלכם? איך בינה מלאכותית תעזור בו? איך הוא יפתור בעיות ויחזק קשרים?",
+                                type: "creative_project",
+                                task: "תכננו פרויקט מפורט שמשלב ב\"מ ומשפר לכידות חברתית בכיתה",
+                                expectedConcepts: ["פלטפורמה דיגיטלית", "מערכת תיאום", "כלי תקשורת", "מערכת המלצות", "פתרון יצירתי"]
+                            },
+                            {
+                                message: "רעיון מעולה! עכשיו בואו נהיה ביקורתיים ומאוזנים. לכל טכנולוגיה יש יתרונות וחסרונות. חשבו על הפרויקט שלכם:\n\n• מה היתרונות של השימוש בבינה מלאכותית?\n• מה הסכנות או החסרונות?\n• מתי עדיף לעשות דברים בלי מחשב, רק עם אנשים?\n• איך תשמרו על החשיבה והיצירתיות האנושית?",
+                                type: "critical_analysis", 
+                                task: "נתחו באופן ביקורתי את היתרונות והחסרונות של הפרויקט שלכם",
+                                expectedConcepts: ["יתרונות וחסרונות", "מגבלות טכנולוגיה", "חשיבות אנושית", "איזון", "חשיבה ביקורתית"]
+                            },
+                            {
+                                message: "חשיבה מעמיקה! כעת, בואו נתכנן את המימוש. איך תוודאו שהפרויקט שלכם באמת עוזר לכל התלמידים? איך תשפרו אותו לאורך הזמן? איך תקבלו משוב ותתאימו אותו לצרכים השונים?\n\nתכננו את שלבי הפיתוח והשיפור של הפרויקט תחת הנחיית המורה.",
+                                type: "implementation",
+                                task: "תכננו את שלבי המימוש, המעקב והשיפור של הפרויקט",
+                                expectedConcepts: ["שלבי פיתוח", "משוב מתמשך", "התאמה אישית", "מעקב ושיפור", "הנחיית מורה"]
+                            }
+                        ]
+                    },
+                    4: {
+                        title: "תפקוד אתי בתחום הבינה המלאכותית",
+                        steps: [
+                            {
+                                message: "הגענו לחלק הכי חשוב - השימוש האתי והאחראי! ⚖️\n\nבואו נחזור למצב של יום שהביא במבה. דמיינו שיש לכם מערכת שאמורה לעזור בתיאום הארוחות. איך תוודאו שהמערכת מתחשבת בכל התלמידים? איך תשמרו על זה שגם תלמידים עם צרכים מיוחדים (אלרגיות, העדפות דת, מגבלות כספיות) ירגישו שייכים ונכללים?\n\nמה המחשבות שלכם על יצירת טכנולוגיה הוגנת וכוללת?",
+                                type: "inclusion_fairness",
+                                task: "הציעו דרכים לוודא שהטכנולוגיה מכילה ומתחשבת בכל התלמידים",
+                                expectedConcepts: ["הוגנות", "שוויון הזדמנויות", "נגישות", "התחשבות בשונות", "הכלה חברתית"]
+                            },
+                            {
+                                message: "מעולה! עכשיו נושא מאוד חשוב - הטיות. דמיינו מערכת שמחלקת תלמידים לקבוצות לפעילויות. מה קורה אם:\n• המערכת תמיד שמה את אותם תלמידים יחד?\n• היא מפרידה בין בנים ובנות?\n• היא מעדיפה תלמידים מסוימים?\n• היא לא נותנת הזדמנות לידידויות חדשות?\n\nאיך מצבים כאלה יכולים להשפיע על הלכידות בכיתה? איך נוכל למנוע הטיות כאלה?",
+                                type: "bias_awareness",
+                                task: "זהו בעיות הטיה אפשריות במערכות ב\"מ והציעו פתרונות",
+                                expectedConcepts: ["זיהוי הטיות", "אפליה לא מכוונת", "מגוון ופלורליזם", "הזדמנויות שוות", "מניעת דעות קדומות"]
+                            },
+                            {
+                                message: "תובנות חשובות! כעת, בואו ניצור יחד 'חוקת כיתה' לשימוש אחראי בבינה מלאכותית. אתם התלמידים שיקבעו את הכללים!\n\nחשבו על 5 כללים חשובים שכל תלמיד בכיתה צריך לקיים כשהוא משתמש בבינה מלאכותית (בלימודים, בפרויקטים, בחיי היומיום). למה כל כלל חשוב? איך הוא יעזור ליצור סביבה טובה יותר לכולם?",
+                                type: "ethical_guidelines",
+                                task: "צרו 5 כללים אתיים לשימוש בב\"מ בכיתה, עם הסבר לכל כלל",
+                                expectedConcepts: ["כללי התנהגות", "אחריות אישית", "כבוד הדדי", "שקיפות", "שימוש מועיל", "הגנת פרטיות"]
+                            }
+                        ]
+                    }
+                };
+                
+                this.init();
+            }
+
+            init() {
+                this.messagesContainer = document.getElementById('messages');
+                this.messageInput = document.getElementById('messageInput');
+                this.sendBtn = document.getElementById('sendBtn');
+                this.thinkingIndicator = document.getElementById('thinkingIndicator');
+                this.progressFill = document.getElementById('progressFill');
+                this.currentSkillLabel = document.getElementById('currentSkillLabel');
+                this.progressText = document.getElementById('progressText');
+
+                this.setupEventListeners();
+                this.startCurrentScenario();
+                this.updateProgress();
+            }
+
+            setupEventListeners() {
+                this.sendBtn.addEventListener('click', () => this.sendMessage());
+                this.messageInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+
+                document.querySelectorAll('.skill-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const skill = parseInt(e.target.dataset.skill);
+                        this.switchSkill(skill);
+                    });
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('quick-btn')) {
+                        this.messageInput.value = e.target.textContent;
+                        this.sendMessage();
+                    }
+                });
+            }
+
+            switchSkill(skillNumber) {
+                this.currentSkill = skillNumber;
+                this.currentStep = 0;
+                
+                document.querySelectorAll('.skill-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-skill="${skillNumber}"]`).classList.add('active');
+
+                this.messagesContainer.innerHTML = '';
+                this.startCurrentScenario();
+                this.updateProgress();
+            }
+
+            startCurrentScenario() {
+                const scenario = this.scenarios[this.currentSkill];
+                const step = scenario.steps[this.currentStep];
+                
+                setTimeout(() => {
+                    // הוספת כרטיס המשימה
+                    this.addTaskCard(step);
+                    // הוספת ההודעה הראשית
+                    this.addMessage(step.message, 'bot');
+                    // הוספת כפתורי עזרה
+                    this.addQuickActions(step.type);
+                }, 500);
+            }
+
+            addTaskCard(step) {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task-highlight';
+                taskDiv.innerHTML = `
+                    <h3>📋 המשימה שלכם:</h3>
+                    <p>${step.task}</p>
+                `;
+                this.messagesContainer.appendChild(taskDiv);
+            }
+
+            addQuickActions(type) {
+                const quickActions = {
+                    'understanding': ['אני חושב שהבוט לומד מ...', 'המערכת עובדת על ידי...', 'הבוט זוכר דברים בגלל...'],
+                    'identification': ['אפליקציית תזכורות', 'מערכת התראות', 'יומן דיגיטלי', 'אפליקציית קבוצה'],
+                    'analysis': ['המערכת צריכה לדעת...', 'חשוב שתזכור...', 'היא תקבל החלטות לפי...'],
+                    'communication': ['שלום, אני צריך עזרה עם...', 'המצב הוא שיום...', 'איך אפשר לפתור...'],
+                    'practice': ['טל וירדן נמצאות במצב...', 'הבעיה שלהן היא...', 'איך הן יכולות...'],
+                    'evaluation': ['לשאול מורה או הורים', 'לבדוק במקורות נוספים', 'לחשוב אם זה הגיוני', 'לנסות בזהירות'],
+                    'creative_project': ['אפליקציה לתיאום אירועים', 'מערכת הצבעה על החלטות', 'פלטפורמה לשיתוף רעיונות'],
+                    'critical_analysis': ['יתרונות: מהיר ויעיל', 'חסרונות: פחות אישי', 'מתי עדיף בלי מחשב'],
+                    'implementation': ['שלב ראשון: תכנון', 'איך נקבל משוב', 'איך נשפר לאורך זמן'],
+                    'inclusion_fairness': ['טכנולוגיה נגישה לכולם', 'התחשבות בצרכים מיוחדים', 'הזדמנויות שוות'],
+                    'bias_awareness': ['המערכת עלולה להפלות', 'לא נותנת הזדמנויות שוות', 'יוצרת קבוצות קבועות'],
+                    'ethical_guidelines': ['כלל 1: לבדוק מידע', 'כלל 2: לכבד אחרים', 'כלל 3: להיות הוגנים']
+                };
+
+                if (quickActions[type]) {
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'quick-actions';
+                    
+                    quickActions[type].forEach(action => {
+                        const btn = document.createElement('button');
+                        btn.className = 'quick-btn';
+                        btn.textContent = action;
+                        actionsDiv.appendChild(btn);
+                    });
+                    
+                    this.messagesContainer.appendChild(actionsDiv);
+                    this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+                }
+            }
+
+            sendMessage() {
+                const message = this.messageInput.value.trim();
+                if (!message) return;
+
+                this.addMessage(message, 'user');
+                this.messageInput.value = '';
+                this.sendBtn.disabled = true;
+
+                // הסרת כפתורי העזרה המהירה
+                const quickActions = this.messagesContainer.querySelector('.quick-actions');
+                if (quickActions) {
+                    quickActions.remove();
+                }
+
+                this.showThinking();
+                setTimeout(() => {
+                    this.processUserMessage(message);
+                }, 2000);
+            }
+
+            addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                messageDiv.textContent = text;
+                this.messagesContainer.appendChild(messageDiv);
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+
+            showThinking() {
+                this.thinkingIndicator.style.display = 'flex';
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+
+            hideThinking() {
+                this.thinkingIndicator.style.display = 'none';
+            }
+
+            processUserMessage(message) {
+                this.hideThinking();
+                
+                const scenario = this.scenarios[this.currentSkill];
+                const step = scenario.steps[this.currentStep];
+                
+                // בדיקה אם התשובה מכילה מושגים רלוונטיים
+                const hasRelevantConcepts = step.expectedConcepts.some(concept => 
+                    message.includes(concept) || this.containsSimilarConcept(message, concept)
+                );
+
+                const messageLength = message.split(' ').length;
+                const isDetailedResponse = messageLength >= 10;
+                
+                let response = this.generateResponse(message, step, hasRelevantConcepts, isDetailedResponse);
+                
+                this.addMessage(response, 'bot');
+                this.sendBtn.disabled = false;
+
+                // המשך לשלב הבא או סיום המיומנות
+                setTimeout(() => {
+                    if (this.currentStep < scenario.steps.length - 1) {
+                        this.currentStep++;
+                        this.startCurrentScenario();
+                    } else {
+                        this.completeCurrentSkill();
+                    }
+                    this.updateProgress();
+                }, 3000);
+            }
+
+            containsSimilarConcept(message, concept) {
+                const synonyms = {
+                    'למידה מדוגמאות': ['לומד', 'למדה', 'דוגמאות', 'דוגמה', 'אימון', 'תרגול'],
+                    'מידע': ['נתונים', 'ידע', 'פרטים', 'מידע'],
+                    'אפליקציות תזכורות': ['אפליקציה', 'תזכורת', 'התראה', 'זיכרון'],
+                    'רשימת אלרגיות': ['אלרגיה', 'רגישות', 'בטיחות', 'בריאות'],
+                    'הקשר מלא': ['הסבר', 'פרטים', 'רקע', 'מידע מלא'],
+                    'שאילת מבוגרים': ['מורה', 'הורים', 'מבוגר', 'שאילת דעה'],
+                    'פלטפורמה דיגיטלית': ['אתר', 'אפליקציה', 'מערכת', 'כלי דיגיטלי'],
+                    'הוגנות': ['הוגן', 'צודק', 'שוויון', 'צדק'],
+                    'זיהוי הטיות': ['הטיה', 'אפליה', 'העדפה', 'דעות קדומות'],
+                    'כללי התנהגות': ['כללים', 'חוקים', 'הנחיות', 'התנהגות']
+                };
+
+                return Object.keys(synonyms).some(key => {
+                    if (concept.includes(key) || key.includes(concept)) {
+                        return synonyms[key].some(syn => message.includes(syn));
+                    }
+                    return false;
+                });
+            }
+
+            generateResponse(message, step, hasRelevantConcepts, isDetailedResponse) {
+                const responses = {
+                    1: {
+                        0: {
+                            good: "מצוין! אתם מבינים נכון שאני לומד מהמון דוגמאות ומידע. בדיוק כמו שאתם לומדים מניסיון בחיים, גם אני 'התאמנתי' על המון שיחות ומידע כדי להבין איך לענות על שאלות שונות. זה נקרא 'למידת מכונה' - המחשב לומד דפוסים מהנתונים שנותנים לו.",
+                            basic: "תשובה מעניינת! בואו אסביר לכם איך זה עובד: אני לומדת מהמון דוגמאות של שיחות ומידע שאנשים נתנו לי בעבר. המחשב מחפש דפוסים - איך אנשים שואלים שאלות ואיך עונים עליהן. כך אני יודעת איך לענות גם על השאלות שלכם!"
+                        },
+                        1: {
+                            good: "נהדר! אתם מזהים נכון מערכות חשובות שיכולות לעזור. אפליקציות תזכורות יכולות להזכיר לתלמידים מה מותר להביא, מערכות התראות יכולות להתריע על אלרגיות, ויומנים דיגיטליים יכולים לעקוב אחר כל הפרטים החשובים. כל המערכות האלה עובדות על ידי זכירת מידע וביצוע פעולות אוטומטיות.",
+                            basic: "רעיונות טובים! בואו נחשוב על עוד אפשרויות: אפליקציית תזכורות שתזכיר לכל תלמיד מה הוא צריך להביא, מערכת הודעות שתעדכן את כולם על שינויים, או יומן דיגיטלי שיעקוב אחר כל האלרגיות והמגבלות בכיתה."
+                        },
+                        2: {
+                            good: "מדויק מאוד! המערכת תצטרך לדעת על כל האלרגיות והמגבלות, את רשימת התלמידים, את סוגי האוכל המותרים והאסורים, ומועדי האירועים. ככל שהמידע יהיה מדויק ומעודכן יותר, כך המערכת תוכל לתת המלצות טובות יותר ולמנוע טעויות מסוכנות.",
+                            basic: "חשיבה טובה! המערכת תצטרך למידע הבא: רשימה של כל האלרגיות בכיתה, רשימת התלמידים והצרכים המיוחדים שלהם, כללי בטיחות לגבי אוכל, ומועדי האירועים שמתוכננים. כל המידע הזה יעזור לה לקבל החלטות נכונות."
+                        }
+                    },
+                    2: {
+                        0: {
+                            good: "מעולה! אתם מבינים את חשיבות המתן הקשר מפורט. שאלה טובה צריכה לכלול: מה קרה בדיוק (יום הביא במבה למרות האיסור), מי מעורב (יום, התלמיד הרגיש, שאר הכיתה), איך כולם מרגישים, ומה המטרה (לפתור את הקונפליקט ולמנוע את זה בעתיד).",
+                            basic: "תשובה טובה! כדי לקבל עזרה טובה ממני, חשוב לספר: מה קרה בדיוק במקרה הזה, מי האנשים המעורבים, איך כל אחד מרגיש, ומה אתם מקווים לפתור. ככל שתתנו יותר פרטים, כך אוכל לעזור טוב יותר."
+                        },
+                        1: {
+                            good: "שאלה מנוסחת היטב! אתם מבינים איך לתת הקשר טוב על היחסים בין החברות ועל הבעיה הספציפית. עכשיו אני יכולה לעזור לכם בצורה מדויקת יותר לחשוב על פתרונות שיעזרו לטל ולירדן ליצור איזון בריא יותר בחברות שלהן.",
+                            basic: "תודה על השאלה! בואו נעבוד יחד על הבעיה של טל וירדן. מהשאלה שלכם אני מבינה שיש כאן חוסר איזון ביחסים. חשוב שתספרו לי עוד פרטים על איך זה משפיע עליהן כדי שאוכל לעזור טוב יותר."
+                        },
+                        2: {
+                            good: "נהדר! אתם מפתחים חשיבה ביקורתית מעולה. שאילת מבוגרים, בדיקת מקורות נוספים, בחינה אם ההצעה הגיונית, וניסוי בזהירות - אלה כלים חשובים מאוד. תמיד זכרו שגם בוטים יכולים לטעות או לתת עצות שלא מתאימות לכל מצב.",
+                            basic: "תשובה חכמה! תמיד חשוב לבדוק את מה שאני אומרת. אפשר לשאול מורה או הורים, לחפש במקורות נוספים, לחשוב אם ההצעה הגיונית ומעשית, ולנסות בזהירות. זכרו - אני יכולה לעזור, אבל אתם צריכים להחליט בסוף!"
+                        }
+                    },
+                    3: {
+                        0: {
+                            good: "רעיון יצירתי ומעשי! אתם חושבים על דרכים שבינה מלאכותית יכולה לשפר באמת את החיים בכיתה ולחזק קשרים. הפרויקט שלכם מראה הבנה עמוקה של איך טכנולוגיה יכולה לשרת את הקהילה ולפתור בעיות אמיתיות של לכידות חברתית.",
+                            basic: "רעיון מעניין! בואו נפתח אותו יחד - איך בדיוק הפרויקט הזה יעבוד? איך התלמידים ישתמשו בו? איך זה יעזור למנוע מצבים כמו זה של יום והבמבה? חשבו על הפרטים המעשיים של המימוש."
+                        },
+                        1: {
+                            good: "חשיבה ביקורתית מעמיקה! אתם מבינים שטכנולוגיה היא כלי - יש לה יתרונות כמו מהירות ויעילות, אבל גם מגבלות. חשוב לזכור שחלק מהדברים הכי חשובים - כמו אמפתיה, יצירתיות ותקשורת רגשית - נעשים הכי טוב עם אנשים אמיתיים.",
+                            basic: "נקודה טובה! יתרונות של בינה מלאכותית: מהירה, זוכרת הרבה, עובדת 24/7. חסרונות: לא מבינה רגשות כמו אנשים, יכולה לטעות, לפעמים פחות אישית. לפעמים השיחה הישירה בין אנשים היא הכי חשובה!"
+                        },
+                        2: {
+                            good: "תכנון מתחשב ומקצועי! אתם חושבים על המימוש בצורה אחראית - איך לקבל משוב, איך להתאים לצרכים שונים, ואיך לשפר לאורך זמן. זה מראה מנהיגות אמיתית ומחשבה על הקהילה כולה.",
+                            basic: "גישה נהדרת! חשוב לתכנן בשלבים: להתחיל קטן, לקבל משוב מהתלמידים והמורים, לראות מה עובד ומה צריך שיפור, ולהתאים את הפרויקט כך שיעזור לכל הסוגים השונים של תלמידים בכיתה."
+                        }
+                    },
+                    4: {
+                        0: {
+                            good: "תובנות מדהימות! אתם מבינים את החשיבות של טכנולוגיה מכילה שמתחשבת בכל התלמידים. יצירת פתרונות נגישים, התחשבות בצרכים מיוחדים, ושמירה על זה שכל תלמיד מרגיש חלק מהקהילה - אלה הבסיסים של טכנולוגיה אתית.",
+                            basic: "מחשבה חשובה מאוד! טכנולוגיה צריכה לשרת את כולם - לתמוך בתלמידים עם אלרגיות, להתחשב בהעדפות דת ותרבות, ליצור פתרונות שמתאימים לכל הרמות הכלכליות, ולוודא שאף תלמיד לא נשאר מאחור."
+                        },
+                        1: {
+                            good: "זיהוי מצוין של בעיות הטיה חמורות! אתם מבינים איך מערכות יכולות ליצור אפליה לא מכוונת ולפגוע בלכידות החברתית. המודעות שלכם לנושא הזה חשובה מאוד ליצירת טכנולוגיה הוגנת יותר.",
+                            basic: "נקודה קריטית! אם מערכת תמיד יוצרת אותן קבוצות, תלמידים מסוימים עלולים להישאר תמיד ביחד ולא להכיר חברים חדשים. זה יכול ליצור בידוד, קליקות, או להשאיר תלמידים בודדים מחוץ לקבוצה."
+                        },
+                        2: {
+                            good: "חוקת כיתה מעולה! הכללים שלכם מראים הבנה עמוקה של השימוש האחראי בטכנולוגיה. אתם מבינים את החשיבות של אמינות, כבוד, שקיפות והגנת פרטיות. אלה הבסיסים לעתיד טכנולוגי טוב יותר!",
+                            basic: "כללים חשובים! דוגמאות טובות יכולות להיות: תמיד לבדוק אם המידע נכון, לכבד את הפרטיות של אחרים, להשתמש בטכנולוגיה כדי לעזור ולא להזיק, להיות כנים לגבי שימוש בעזרת מחשב, ולתת קרדיט למקורות."
+                        }
+                    }
+                };
+
+                const skillResponses = responses[this.currentSkill][this.currentStep];
+                if (hasRelevantConcepts && isDetailedResponse) {
+                    return skillResponses.good;
+                } else {
+                    return skillResponses.basic;
+                }
+            }
+
+            completeCurrentSkill() {
+                const completionMessages = {
+                    1: "🎉 כל הכבוד! סיימתם בהצלחה את המיומנות הראשונה - זיהוי מנגנוני בינה מלאכותית. אתם מבינים איך מערכות אלו עובדות ואיך הן יכולות לעזור בפתרון בעיות של לכידות חברתית כמו המקרה של יום והבמבה!",
+                    2: "🌟 מעולה! השלמתם את המיומנות השנייה - שימוש יעיל ומושכל. אתם יודעים איך לתקשר עם בינה מלאכותית בצורה נכונה ואיך להעריך ביקורתית את התשובות שהיא נותנת!",
+                    3: "🚀 פנטסטי! סיימתם את המיומנות השלישית - שימוש יוזם ויוצר ערך. אתם יכולים לחשוב יצירתיה על פרויקטים שמשפרים את הלכידות החברתית בכיתה ובקהילה!",
+                    4: "👑 מדהים! השלמתם את כל המיומנויות! אתם עכשיו בעלי כשירות בינה מלאכותית מלאה - יודעים להשתמש בטכנולוגיה בצורה חכמה, יצירתית ואתית למען קהילה טובה יותר!"
+                };
+
+                this.addMessage(completionMessages[this.currentSkill], 'bot');
+
+                if (this.currentSkill < 4) {
+                    setTimeout(() => {
+                        this.addMessage("🔄 מוכנים להתקדם למיומנות הבאה? לחצו על הכפתור הבא למעלה או המשיכו לחקור את הנושא עמוק יותר!", 'bot');
+                    }, 2000);
+                } else {
+                    setTimeout(() => {
+                        this.showFinalCertificate();
+                    }, 2500);
+                }
+            }
+
+            showFinalCertificate() {
+                const certificateHTML = `
+                    <div class="task-highlight" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: 3px solid #FFD700;">
+                        <h2 style="color: #FFD700; margin-bottom: 20px;">🏆 תעודת הסמכה בכשירות בינה מלאכותית 🏆</h2>
+                        <p style="font-size: 1.2em; margin-bottom: 15px;"><strong>מעיד בזאת כי התלמיד/ה</strong></p>
+                        <div style="font-size: 1.5em; margin: 20px 0; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; color: #FFD700;">
+                            <strong>[שם התלמיד/ה]</strong>
+                        </div>
+                        <p style="margin-bottom: 20px; font-size: 1.1em;">השלים/ה בהצלחה את כל ארבע המיומנויות של כשירות בינה מלאכותית<br>בנושא <strong>לכידות חברתית</strong>:</p>
+                        <div style="text-align: right; margin: 20px 0; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            <div style="margin: 8px 0;">✅ <strong>זיהוי מנגנוני בינה מלאכותית ואופן פעולתם</strong></div>
+                            <div style="margin: 8px 0;">✅ <strong>שימוש יעיל ומושכל בבינה מלאכותית</strong></div>
+                            <div style="margin: 8px 0;">✅ <strong>שימוש יוזם ויוצר ערך בסיוע כלי בינה מלאכותית</strong></div>
+                            <div style="margin: 8px 0;">✅ <strong>תפקוד אתי בתחום הבינה המלאכותית</strong></div>
+                        </div>
+                        <div style="margin: 20px 0; padding: 15px; background: rgba(255,215,0,0.2); border-radius: 10px;">
+                            <p style="font-size: 1.1em; margin-bottom: 10px;"><strong>🌟 הישגים מיוחדים:</strong></p>
+                            <p>• פתח הבנה מעמיקה של הקשר בין טכנולוגיה ולכידות חברתית</p>
+                            <p>• יצר רעיונות יצירתיים לשימוש אתי בבינה מלאכותית</p>
+                            <p>• הפגין חשיבה ביקורתית ומודעות לאתגרים חברתיים</p>
+                        </div>
+                        <p style="margin-top: 20px; font-size: 1.2em; color: #FFD700;"><strong>🎓 מוכן/ה לעתיד טכנולוגי חכם, יצירתי ואחראי! 🎓</strong></p>
+                        <button onclick="window.print()" style="margin-top: 20px; padding: 12px 25px; background: #FFD700; color: #333; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 16px;">📄 הדפס תעודה</button>
+                    </div>
+                `;
+                this.messagesContainer.innerHTML += certificateHTML;
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+
+            updateProgress() {
+                const totalSteps = 12; // 3 שלבים לכל מיומנות × 4 מיומנויות
+                const completedSteps = ((this.currentSkill - 1) * 3) + this.currentStep;
+                const percentage = (completedSteps / totalSteps) * 100;
+                
+                this.progressFill.style.width = `${percentage}%`;
+                this.progressText.textContent = `${completedSteps}/${totalSteps}`;
+                
+                const skillTitles = {
+                    1: "מיומנות 1: זיהוי מנגנוני ב\"מ",
+                    2: "מיומנות 2: שימוש יעיל ומושכל", 
+                    3: "מיומנות 3: שימוש יוזם ויוצר ערך",
+                    4: "מיומנות 4: תפקוד אתי"
+                };
+                
+                this.currentSkillLabel.textContent = skillTitles[this.currentSkill];
+            }
+        }
+
+        // התחלת הבוט כשהדף נטען
+        document.addEventListener('DOMContentLoaded', () => {
+            new AILiteracyBot();
+        });
+    </script>
+</body>
+</html>
