@@ -33,11 +33,19 @@
             text-align: center;
         }
 
+        /* --- שינוי כאן --- */
         .header h1 {
             color: #2c3e50;
-            font-size: 2.2em;
-            margin-bottom: 10px;
+            font-size: 2.5em; /* כותרת ראשית */
+            margin-bottom: 5px;
         }
+
+        .header h2 {
+            color: #2c3e50;
+            font-size: 2.0em; /* כותרת משנה */
+            margin-bottom: 15px;
+        }
+        /* --- סוף שינוי --- */
 
         .header .subtitle {
             color: #7f8c8d;
@@ -290,6 +298,9 @@
             .header h1 {
                 font-size: 1.8em;
             }
+            .header h2 {
+                font-size: 1.5em;
+            }
             
             .choice-buttons {
                 flex-direction: column;
@@ -303,9 +314,11 @@
 </head>
 <body>
     <div class="container">
-        <!-- שינוי 1: הוספת ID לאזור הזה -->
         <div class="header" id="caseDescriptionHeader">
-            <h1>🕵️‍♂️ חקירה עם קיו הבלש 🕵️‍♀️</h1>
+            <!-- --- שינוי כאן --- -->
+            <h1>מה קרה ליוגב?</h1>
+            <h2>🕵️‍♂️ חקירה עם קיו הבלש 🕵️‍♀️</h2>
+            <!-- --- סוף שינוי --- -->
             <div class="subtitle">מקרה הבמבה - עבודה אישית מול הבוט החוקר</div>
             
             <div class="video-prompt">
@@ -434,6 +447,8 @@
 
             <button class="submit-btn" onclick="nextStage(3)">המשך לשלב הבא ➡️</button>
         </div>
+
+        <!-- שאר הקוד נשאר זהה -->
 
         <!-- שלב 3 -->
         <div class="activity-section hidden" id="stage3">
@@ -772,7 +787,6 @@
             }
         }
 
-        // שינוי 2: עדכון הפונקציה כדי להסתיר את החלק העליון
         function nextStage(stage) {
             // הסתר את החלק העליון לאחר שלב 1
             if (stage > 1) {
