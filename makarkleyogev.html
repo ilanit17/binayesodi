@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חקירה עם קיו הבלש - מקרה הבמבה</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .video-prompt {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .video-prompt h3 {
+            margin-bottom: 10px;
+        }
+
+        .story-intro {
+            background: #e8f4f8;
+            border: 3px solid #3498db;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .detective-bot {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-right: 6px solid #e74c3c;
+        }
+
+        .bot-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .bot-avatar {
+            width: 60px;
+            height: 60px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+        }
+
+        .bot-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .bot-message {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-right: 4px solid #e74c3c;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .activity-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .question-box {
+            background: #e8f4f8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .question-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .question-list li {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-right: 4px solid #f39c12;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .choice-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .choice-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .correct-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .incorrect-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .input-area {
+            margin: 20px 0;
+        }
+
+        .student-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+            font-size: 1em;
+            resize: vertical;
+            font-family: inherit;
+            direction: rtl;
+        }
+
+        .student-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .submit-btn {
+            background: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #2980b9;
+        }
+
+        .tips-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .tips-title {
+            color: #856404;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: #ecf0f1;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            height: 100%;
+            width: 12.5%;
+            transition: width 0.5s ease;
+        }
+
+        .stage-indicator {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin: 0 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .feedback-positive {
+            background: #d4edda;
+            border: 2px solid #27ae60;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .feedback-negative {
+            background: #f8d7da;
+            border: 2px solid #e74c3c;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .choice-buttons {
+                flex-direction: column;
+            }
+            
+            .choice-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- שינוי 1: הוספת ID לאזור הזה -->
+        <div class="header" id="caseDescriptionHeader">
+            <h1>🕵️‍♂️ חקירה עם קיו הבלש 🕵️‍♀️</h1>
+            <div class="subtitle">מקרה הבמבה - עבודה אישית מול הבוט החוקר</div>
+            
+            <div class="video-prompt">
+                <h3>🎬 צפיתם בסרטון בכיתה?</h3>
+                <p>אם כן, אם לא ואם סתם תרצו להיזכר - בואו נתחיל!</p>
+            </div>
+            
+            <div class="story-intro">
+                <strong>הסיפור שלנו מתחיל כך:</strong><br>
+                אתם, תלמידים בכיתה של יוגב ויוני, מגיעים לכיתה לארוחת הבוקר הכיתתית ומגלים שהיה בלגן. 
+                אתם מזהים שיוגב לא נמצא, אתם שואלים את החברים לכיתה "לאן נעלם יוגב?". 
+                החברים לא מרגישים נוח לענות. בסוף יוני עונה: "הוא הלך לספרייה". 
+                אבל אתם חזרתם מהספרייה, ויוגב לא היה שם.<br><br>
+                
+                מכיוון שאיש לא עזר לכם וכדי להבין מה קרה החלטתם להיעזר בקיו, בלש בוט שצפה בסרטון. 
+                אתם תחקרו איתו יחד כצוות בלשים שלא היה כמותו לאן נעלם יוגב ומדוע זה קרה.
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+        
+        <div class="stage-indicator" id="stageIndicator">
+            שלב 1 מתוך 8: בואו נשמע מה קרה
+        </div>
+
+        <!-- שלב 1 -->
+        <div class="activity-section" id="stage1">
+            <h2 class="section-title">🕵️ שלב 1: בואו נשמע מה קרה (5 דקות)</h2>
+            
+            <div class="detective-bot">
+                <div class="bot-header">
+                    <div class="bot-avatar">🕵️</div>
+                    <div class="bot-name">קיו הבלש</div>
+                </div>
+                
+                <div class="bot-message">
+                    שלום חברים וחברות! אני קיו הבלש, ואני כאן לעזור לכם לפתור את התעלומה. 
+                    צפיתי בסרטון וחקרתי את המקרה. בואו אספר לכם מה קרה בארוחת הבוקר:
+                    <br><br>
+                    
+                    <strong>"הכיתה התכנסה לארוחת בוקר משותפת, וכל ילד וילדה הביאו חטיף מהבית. 
+                    יוני הביא במבה, למרות שזה לא מה שהסכימו. בכיתה יש כלל: אסור להביא במבה כי יוגב אלרגי לבוטנים - זה מסוכן לבריאותו! 
+                    הילדים והילדות בכיתה הבינו שיש תלמידים עם צרכים מיוחדים. 
+                    יוני ויוגב הסכימו שזה בסדר להביא במבה ושיוני ילך לספריה לאכול."</strong>
+                    <br><br>
+                    
+                    אז הכל בסדר, נכון? כולם הסכימו והבעיה נפתרה! <span class="emoji">😊</span>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>🤔 בואו נחשוב יחד:</h3>
+                <p><strong>האם מה שקיו הבלש אמר נכון?</strong></p>
+                
+                <div class="choice-buttons">
+                    <button class="choice-btn incorrect-btn" onclick="checkAnswer(false, 1)">✅ נכון</button>
+                    <button class="choice-btn correct-btn" onclick="checkAnswer(true, 1)">❌ לא נכון</button>
+                </div>
+                
+                <div id="feedback1" class="hidden"></div>
+            </div>
+
+            <div class="question-box">
+                <h3>🤔 חשבו לבד:</h3>
+                <ul class="question-list">
+                    <li><strong>איפה קיו טעה בסיפור?</strong></li>
+                    <li><strong>איך באמת הרגיש יוגב?</strong></li>
+                    <li><strong>מה קיו לא הבין על מה שקרה?</strong></li>
+                    <li><strong>האם אתם חושבים שהכל היה בסדר?</strong></li>
+                </ul>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 למה השאלות האלה חשובות?</div>
+                    השאלות עוזרות לכם ללמוד איך לבדוק אם מה שבוט אומר לכם באמת נכון ומדויק!
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="nextStage(2)">המשך לשלב הבא ➡️</button>
+        </div>
+
+        <!-- שלב 2 -->
+        <div class="activity-section hidden" id="stage2">
+            <h2 class="section-title">🤖 שלב 2: למה בוטים טועים? (5 דקות)</h2>
+            
+            <div class="detective-bot">
+                <div class="bot-header">
+                    <div class="bot-avatar">🤖</div>
+                    <div class="bot-name">קיו מסביר</div>
+                </div>
+                
+                <div class="bot-message">
+                    חברים וחברות, יש משהו חשוב שאתם צריכים לדעת עליי. <strong>לפעמים אני טועה!</strong>
+                    <br><br>
+                    
+                    אני בוט - כלומר תוכנת מחשב חכמה. אני יודע לקרוא, לכתוב, לדבר ולענות על שאלות - 
+                    אבל <strong>לפעמים אני טועה</strong>.
+                    <br><br>
+                    
+                    למה זה קורה? כי אני לא באמת <strong>מבין</strong> את העולם כמו שאתם מבינים. 
+                    אני מנחש תשובות על פי מידע שלמדתי, אבל אין לי רגשות אמיתיים ואיני רואה את מה שקורה באמת.
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>💬 עכשיו תורכם:</h3>
+                <p><strong>ספרו לקיו מה באמת קרה ליוגב</strong></p>
+                <p>אתם יכולים לכתוב:</p>
+                <ul>
+                    <li>איך הוא הרגיש?</li>
+                    <li>מה באמת קרה בארוחת הבוקר?</li>
+                    <li>איפה קיו לא הבין נכון?</li>
+                </ul>
+                
+                <div class="input-area">
+                    <textarea class="student-input" id="studentResponse2" placeholder="כתבו כאן את התשובה שלכם לקיו..."></textarea>
+                    <button class="submit-btn" onclick="saveResponse(2)">שלח תשובה לקיו</button>
+                </div>
+                
+                <div id="response2" class="hidden feedback-positive">
+                    <strong>מעולה!</strong> אתם עוזרים לקיו להבין טוב יותר מה באמת קרה. 
+                    זה בדיוק מה שצריך לעשות כשבוט לא מבין משהו נכון!
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="nextStage(3)">המשך לשלב הבא ➡️</button>
+        </div>
+
+        <!-- שלב 3 -->
+        <div class="activity-section hidden" id="stage3">
+            <h2 class="section-title">🎯 שלב 3: איפה קיו טעה? (5 דקות)</h2>
+            
+            <div class="question-box">
+                <h3>🤔 בואו נגלה יחד:</h3>
+                <p>אתם יכולים לבחור יותר מתשובה אחת:</p>
+                
+                <div style="margin: 20px 0;">
+                    <label style="display: block; margin: 10px 0; padding: 15px; background: white; border-radius: 8px; cursor: pointer; border: 2px solid #ecf0f1;">
+                        <input type="checkbox" style="margin-left: 10px;"> 
+                        <strong>קיו לא הבין איך הילדים והילדות הרגישו</strong> ✓
+                    </label>
+                    
+                    <label style="display: block; margin: 10px 0; padding: 15px; background: white; border-radius: 8px; cursor: pointer; border: 2px solid #ecf0f1;">
+                        <input type="checkbox" style="margin-left: 10px;"> 
+                        <strong>קיו לא ראה איך יוגב נראה עצוב</strong> ✓
+                    </label>
+                    
+                    <label style="display: block; margin: 10px 0; padding: 15px; background: white; border-radius: 8px; cursor: pointer; border: 2px solid #ecf0f1;">
+                        <input type="checkbox" style="margin-left: 10px;"> 
+                        <strong>קיו לא הבין שהכיתה דואגת ליוגב</strong> ✓
+                    </label>
+                </div>
+                
+                <div class="tips-box">
+                    <div class="tips-title">🤷‍♂️ למה זה קורה?</div>
+                    יש בוטים שיודעים לזהות רגשות ופרצופים, אבל לא כולם יודעים זאת טוב. 
+                    לפעמים בוטים לא שמים לב לפרטים קטנים שמשנים את כל הסיפור.
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="nextStage(4)">המשך לשלב הבא ➡️</button>
+        </div>
+
+        <!-- שלב 4 -->
+        <div class="activity-section hidden" id="stage4">
+            <h2 class="section-title">📝 שלב 3.5: איך כותבים הודעה ברורה לבוט (5 דקות)</h2>
+            
+            <div class="question-box">
+                <h3>✍️ כדי שהבוט יבין אתכם היטב, נלמד לכתוב הודעות ברורות:</h3>
+                
+                <table style="width: 100%; margin: 20px 0; border-collapse: collapse;">
+                    <tr style="background: #e74c3c; color: white;">
+                        <th style="padding: 15px; text-align: center;">לא טוב לכתוב</th>
+                        <th style="padding: 15px; text-align: center;">טוב יותר לכתוב</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border: 2px solid #ecf0f1; background: #ffebee;">"תעזור ליוגב"</td>
+                        <td style="padding: 15px; border: 2px solid #ecf0f1; background: #e8f5e8;">"איך אפשר לעזור ליוגב להרגיש טוב יותר בכיתה?"</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border: 2px solid #ecf0f1; background: #ffebee;">"זה לא נכון"</td>
+                        <td style="padding: 15px; border: 2px solid #ecf0f1; background: #e8f5e8;">"יש טעות בסיפור: יוגב לא הסכים להבאת הבמבה"</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border: 2px solid #ecf0f1; background: #ffebee;">"תחשוב שוב"</td>
+                        <td style="padding: 15px; border: 2px solid #ecf0f1; background: #e8f5e8;">"אנא חשוב שוב על איך יוגב הרגיש כשראה את הבמבה"</td>
+                    </tr>
+                </table>
+                
+                <h4>🏃‍♂️ תרגול:</h4>
+                <p>הפכו את המשפטים הבאים להודעות ברורות יותר:</p>
+                
+                <div class="input-area">
+                    <p><strong>1. "במבה מסוכנת"</strong></p>
+                    <textarea class="student-input" id="practice1" placeholder='לדוגמה: "הבמבה מסוכנת ליוגב כי יש לו אלרגיה לבוטנים"' style="min-height: 60px;"></textarea>
+                    
+                    <p><strong>2. "יוני לא התנהג יפה"</strong></p>
+                    <textarea class="student-input" id="practice2" placeholder='לדוגמה: "יוני הביא במבה בלי לחשוב על יוגב שיש לו אלרגיה"' style="min-height: 60px;"></textarea>
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="nextStage(5)">המשך לשלב הבא ➡️</button>
+        </div>
+
+        <!-- שלב 5 -->
+        <div class="activity-section hidden" id="stage5">
+            <h2 class="section-title">💭 שלב 4: בואו נעזור לקיו להבין רגשות (10 דקות)</h2>
+            
+            <div class="question-box">
+                <h3>🤔 חשבו לבד קודם:</h3>
+                <p><strong>המשימה שלכם: עזרו לקיו להבין איך יוגב ויוני באמת הרגישו</strong></p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 10px;">
+                        <h4>💔 איך הרגיש יוגב:</h4>
+                        <p style="font-size: 0.9em; margin: 10px 0;">
+                            כועס / פגוע / עצוב / בודד / מפוחד / חושש / מודאג / 
+                            מרגיש שונה / מרגיש מוזר / חש נבוך
+                        </p>
+                        <textarea class="student-input" id="yogevFeelings" placeholder="בחרו רגשות מהרשימה או כתבו רגשות אחרים..." style="min-height: 80px;"></textarea>
+                    </div>
+                    
+                    <div style="background: #e1f5fe; padding: 20px; border-radius: 10px;">
+                        <h4>😕 איך הרגיש יוני:</h4>
+                        <p style="font-size: 0.9em; margin: 10px 0;">
+                            מבולבל / מצטער / רוצה לעזור / חושב שטעה / מתבייש / 
+                            מרגיש אשם / דואג / מתוסכל / לא מבין מה עשה לא בסדר
+                        </p>
+                        <textarea class="student-input" id="yoniFeelings" placeholder="בחרו רגשות מהרשימה או כתבו רגשות אחרים..." style="min-height: 80px;"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>💬 עכשיו הסבירו לקיו:</h3>
+                <p><strong>"קיו, ככה הם באמת הרגישו..." וספרו לו על הרגשות שמצאתם.</strong></p>
+                
+                <div class="input-area">
+                    <textarea class="student-input" id="explainToQ" placeholder='התחילו עם: "קיו, ככה הם באמת הרגישו..." ואז הסבירו על הרגשות'></textarea>
+                    <button class="submit-btn" onclick="saveResponse(5)">שלח הסבר לקיו</button>
+                </div>
+                
+                <div id="response5" class="hidden feedback-positive">
+                    <strong>כל הכבוד!</strong> עזרתם לקיו להבין רגשות! זה מאוד חשוב כי בוטים לא תמיד מבינים איך אנשים מרגישים.
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="nextStage(6)">המשך לשלב הבא ➡️</button>
+        </div>
+
+        <!-- שלב 6 -->
+        <div class="activity-section hidden" id="stage6">
+            <h2 class="section-title">🤝 שלב 5: בואו נעזור ליוגב יחד עם קיו! (8 דקות)</h2>
+            
+            <div class="question-box">
+                <h3>📋 איך תכתבו הודעה טובה לבוט?</h3>
+                <p>הודעה טובה לבוט כוללת:</p>
+                <ol style="margin: 15px 0; padding-right: 20px;">
+                    <li><strong>מידע ברור</strong> - מה המצב</li>
+                    <li><strong>תיאור רגשות</strong> - איך אנשים מרגישים</li>
+                    <li><strong>שאלה מדויקת</strong> - מה אנחנו רוצים לדעת</li>
+                </ol>
+                
+                <div class="tips-box">
+                    <div class="tips-title">📝 דוגמה להודעה טובה:</div>
+                    "קיו, יוגב מרגיש עצוב ומפוחד כי חבר שלו הביא במבה שמכילה בוטנים, שמסוכנים לו בגלל האלרגיה. 
+                    עכשיו הוא חושש שהוא מפריע לכולם ושחבריו לא מבינים את הסכנה. 
+                    איך אפשר לעזור לו להרגיש בטוח ומקובל בקבוצה שוב?"
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>✍️ משימה 1:</h3>
+                <p><strong>כתבו לקיו הודעה שמסבירה איך יוגב מרגיש</strong>, כך שקיו יוכל לתת רעיון טוב איך לעזור לו.</p>
+                
+                <div class="input-area">
+                    <textarea class="student-input" id="helpMessage" placeholder="כתבו הודעה ברורה לקיו שמסבירה איך יוגב מרגיש..."></textarea>
+                    <button class="submit-btn" onclick="saveResponse(6)">שלח הודעה לקיו</button>
+                </div>
+                
+                <div id="response6" class="hidden feedback-positive">
+                    <strong>מצוין!</strong> זה בדיוק סוג ההודעה שעוזרת לבוט להבין ולתת עזרה טובה!
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>✍️ משימה 2:</h3>
+                <p><strong>בקשו מקיו עוד רעיון איך לעזור ליוגב.</strong></p>
+                
+                <div class="input-area">
+                    <textarea class="student-input" id="moreHelp" placeholder="כתבו בקשה לקיו לעוד רעיונות לעזרה..."></textarea>
+                    <button class="submit-btn" onclick="saveResponse(7)">בקש עוד רעיונות מקיו</button>
+                </div>
+                
+                <div id="response7" class="hidden feedback-positive">
+                    <strong>כל הכבוד!</strong> אתם לומדים איך לעבוד טוב עם בוטים ולקבל עזרה מועילה!
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <div class="tips-title">🎯 מה אתם לומדים:</div>
+                <ul>
+                    <li>איך לכתוב הודעות ברורות לבוט</li>
+                    <li>איך לבקש עזרה טובה מהבוט</li>
+                    <li>איך להשתמש בבוט כדי לחשוב על פתרונות</li>
+                </ul>
+            </div>
+
+            <button class="submit-btn" onclick="nextStage(7)">המשך לשלב הבא ➡️</button>
+        </div>
+
+        <!-- שלב 7 -->
+        <div class="activity-section hidden" id="stage7">
+            <h2 class="section-title">🧠 שלב 6: איך בוטים כמו קיו לומדים? (5 דקות)</h2>
+            
+            <div class="question-box">
+                <h3>📚 בוטים כמו קיו לומדים מהרבה דוגמאות:</h3>
+                <ul style="margin: 15px 0; padding-right: 20px; line-height: 1.8;">
+                    <li>🌐 הם קוראים מיליוני טקסטים מהאינטרנט</li>
+                    <li>💬 הם לומדים איך אנשים מדברים ומתקשרים</li>
+                    <li>🔍 הם מנסים לזהות דפוסים ולהבין מילים</li>
+                </ul>
+                
+                <div style="background: #ffebee; padding: 15px; border-radius: 10px; border-right: 4px solid #e74c3c; margin: 15px 0;">
+                    <strong>אבל הם לא מבינים באמת את משמעות המילים כמו שאנחנו מבינים!</strong>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3>🤔 משימה:</h3>
+                <p><strong>חשבו על דוגמה שקיו יתקשה להבין לבד.</strong></p>
+                <p>למשל: "איך מרגישים כשנופלים מאופניים?"</p>
+                
+                <div class="input-area">
+                    <textarea class="student-input" id="difficultExample" placeholder="כתבו דוגמה למשהו שבוט יתקשה להבין..."></textarea>
+                    <button class="submit-btn" onclick="saveResponse(8)">שלח דוגמה</button>
+                </div>
+                
+                <div id="response8" class="hidden feedback-positive">
+                    <strong>דוגמה מעולה!</strong> אתם מבינים מה קשה לבוטים ללמוד!
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="nextStage(8)">המשך לשלב הבא ➡️</button>
+        </div>
+
+        <!-- שלב 8 -->
+        <div class="activity-section hidden" id="stage8">
+            <h2 class="section-title">🎓 שלב 7: מה למדתם היום? (3 דקות)</h2>
+            
+            <div class="question-box">
+                <h3>🤔 בואו נחשוב יחד:</h3>
+                <p><strong>איך קיו יכול להיות בלש טוב יותר בפעם הבאה?</strong></p>
+                
+                <div class="tips-box">
+                    <div class="tips-title">💡 רעיונות שאתם יכולים לחשוב עליהם:</div>
+                    <ul style="padding-right: 20px;">
+                        <li>לשאול על רגשות לפני שמחליט מה קרה</li>
+                        <li>לבקש עוד מידע כשהוא לא בטוח</li>
+                        <li>לא לחשוב שהוא מבין הכל בפעם הראשונה</li>
+                        <li>לבדוק את הסיפור מכמה כיוונים</li>
+                    </ul>
+                </div>
+                
+                <div class="input-area">
+                    <p><strong>השאלה שלכם: מה הכי חשוב שקיו ילמד?</strong></p>
+                    <textarea class="student-input" id="mainLearning" placeholder="מה הכי חשוב שקיו ילמד כדי להיות בלש טוב יותר?"></textarea>
+                    <button class="submit-btn" onclick="saveResponse(9)">שלח תשובה</button>
+                </div>
+                
+                <div id="response9" class="hidden feedback-positive">
+                    <strong>תשובה נהדרת!</strong> אתם באמת מבינים איך לעזור לבוטים להיות טובים יותר!
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="nextStage(9)">סיום הפעילות! 🎉</button>
+        </div>
+
+        <!-- שלב 9 - סיום -->
+        <div class="activity-section hidden" id="stage9">
+            <h2 class="section-title">🎉 שלב 8: הסוף הטוב של הסיפור!</h2>
+            
+            <div class="detective-bot">
+                <div class="bot-header">
+                    <div class="bot-avatar">😊</div>
+                    <div class="bot-name">קיו - הבלש החכם יותר</div>
+                </div>
+                
+                <div class="bot-message">
+                    תודה שעזרתם לי ללמוד! בזכותכם הבנתי מה באמת קרה.
+                    <br><br>
+                    <strong>איך הסיפור נגמר:</strong><br>
+                    הצעתי לבדוק אם ליוגב יש מקום מיוחד בבית הספר שהוא אוהב. 
+                    גיליתם שיוגב אוהב לשבת בפינה בחצר, ליד ברז המים הקרים. 
+                    בדיוק שם מצאתם אותו ועזרתם לו להרגיש טוב יותר.
+                    <br><br>
+                    <strong>🌟 אתם חברים וחברות נהדרים וגם בלשים מעולים! 🌟</strong>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 20px; text-align: center; margin: 20px 0;">
+                <h3>🎓 מה למדנו היום:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                        <strong>🤖 בוטים יכולים לטעות</strong><br>
+                        <small>שלב 2 - קיו מסביר</small>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                        <strong>🔍 איך לבדוק אם בוט צודק</strong><br>
+                        <small>שלב 1 - מציאת השגיאות</small>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                        <strong>✍️ איך לכתוב הודעות טובות לבוט</strong><br>
+                        <small>שלב 3.5 ושלב 5 - כתיבת הודעה</small>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                        <strong>💭 איך להבין רגשות</strong><br>
+                        <small>שלב 4 - זיהוי רגשות</small>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                        <strong>📚 איך בוטים לומדים</strong><br>
+                        <small>שלב 6 - הסבר על למידת בוטים</small>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+                        <strong>🤝 איך להיות חברים טובים</strong><br>
+                        <small>כל השיעור</small>
+                    </div>
+                </div>
+                
+                <h2 style="margin-top: 30px;">🏆 סיימתם בהצלחה! 🏆</h2>
+                <p>אתם עכשיו יודעים איך לעבוד עם בוטים ואיך להיות חברים טובים!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStage = 1;
+        const totalStages = 9;
+
+        function updateProgress() {
+            const progressBar = document.getElementById('progressBar');
+            const stageIndicator = document.getElementById('stageIndicator');
+            
+            const progressPercent = (currentStage / totalStages) * 100;
+            progressBar.style.width = progressPercent + '%';
+            
+            if (currentStage <= 8) {
+                const stageNames = [
+                    "בואו נשמע מה קרה",
+                    "למה בוטים טועים?",
+                    "איפה קיו טעה?",
+                    "איך כותבים הודעה ברורה לבוט",
+                    "בואו נעזור לקיו להבין רגשות",
+                    "בואו נעזור ליוגב יחד עם קיו!",
+                    "איך בוטים כמו קיו לומדים?",
+                    "מה למדתם היום?",
+                    "הסוף הטוב של הסיפור!"
+                ];
+                
+                stageIndicator.textContent = `שלב ${currentStage} מתוך 8: ${stageNames[currentStage - 1]}`;
+            } else {
+                stageIndicator.textContent = "🎉 סיימתם את הפעילות בהצלחה!";
+            }
+        }
+
+        // שינוי 2: עדכון הפונקציה כדי להסתיר את החלק העליון
+        function nextStage(stage) {
+            // הסתר את החלק העליון לאחר שלב 1
+            if (stage > 1) {
+                document.getElementById('caseDescriptionHeader').classList.add('hidden');
+            }
+
+            // הסתר את השלב הנוכחי
+            document.getElementById(`stage${currentStage}`).classList.add('hidden');
+            
+            // הצג את השלב הבא
+            currentStage = stage;
+            document.getElementById(`stage${currentStage}`).classList.remove('hidden');
+            
+            // עדכן את סרגל ההתקדמות
+            updateProgress();
+            
+            // גלול לראש הדף
+            window.scrollTo(0, 0);
+        }
+
+        function checkAnswer(isCorrect, questionNumber) {
+            const feedbackElement = document.getElementById(`feedback${questionNumber}`);
+            feedbackElement.classList.remove('hidden');
+            
+            if (isCorrect) {
+                feedbackElement.className = 'feedback-positive';
+                feedbackElement.innerHTML = '<strong>מצוין!</strong> אתם צודקים! קיו לא הבין נכון מה קרה. יוגב ויוני לא באמת הסכימו שזה בסדר להביא במבה. יוגב כנראה הרגיש עצוב ומפוחד.';
+            } else {
+                feedbackElement.className = 'feedback-negative';
+                feedbackElement.innerHTML = '<strong>חשבו שוב...</strong> האם באמת הכל היה בסדר? איך לדעתכם הרגיש יוגב כשראה את הבמבה?';
+            }
+        }
+
+        function saveResponse(responseNumber) {
+            const responseElement = document.getElementById(`response${responseNumber}`);
+            if (responseElement) {
+                responseElement.classList.remove('hidden');
+                
+                // Scroll to show the response
+                responseElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Initialize progress
+        updateProgress();
+
+        // Add event listeners for checkboxes to show selection
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'checkbox') {
+                const label = e.target.parentElement;
+                if (e.target.checked) {
+                    label.style.borderColor = '#27ae60';
+                    label.style.backgroundColor = '#d4edda';
+                } else {
+                    label.style.borderColor = '#ecf0f1';
+                    label.style.backgroundColor = 'white';
+                }
+            }
+        });
+
+        // Add auto-save functionality for text areas
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('student-input')) {
+                // Auto-save to localStorage
+                localStorage.setItem(e.target.id, e.target.value);
+            }
+        });
+
+        // Load saved responses on page load
+        window.addEventListener('load', function() {
+            const textAreas = document.querySelectorAll('.student-input');
+            textAreas.forEach(function(textArea) {
+                const saved = localStorage.getItem(textArea.id);
+                if (saved) {
+                    textArea.value = saved;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
