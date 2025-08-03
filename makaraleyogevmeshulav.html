@@ -359,7 +359,6 @@
             margin: 20px 0;
         }
 
-        /* תיקון 4: הוספת עיצובים חסרים */
         .highlight-box {
             background: #f1f3f4;
             padding: 25px;
@@ -375,7 +374,6 @@
         }
     </style>
     <script>
-        // תיקון 1: שימוש בפונקציה גנרית ויציבה לבחירת פריטים
         function selectItem(element) {
             element.classList.toggle('selected');
             console.log('מצב הבחירה שונה עבור:', element.innerText.trim());
@@ -412,7 +410,6 @@
             tips.style.display = tips.style.display === 'none' ? 'block' : 'none';
         }
 
-        // תיקון 3: הוספת פונקציות לכפתורים לא פעילים
         function recordAudio() {
              alert('🎤 פונקציונליות ההקלטה תתווסף בקרוב!');
         }
@@ -433,7 +430,6 @@
             const maxHeight = document.body.scrollHeight - window.innerHeight;
             const scrollProgress = (scrolled / maxHeight) * 100;
             
-            // תיקון 2: מניעת "איפוס" של פס ההתקדמות בגלילה
             const currentProgress = parseFloat(progressBar.style.width) || 0;
             const newProgress = Math.max(currentProgress, scrollProgress);
 
@@ -482,18 +478,7 @@
                     <p><strong>🤖 החלטתם להיעזר בקיו - בלש בוט חכם שצפה בסרטון!</strong></p>
                 </div>
 
-                <div class="feedback-system">
-                    <div class="feedback-item feedback-correct">
-                        <div style="font-size: 2em;">⭐️</div>
-                        <p><strong>תשובה נכונה</strong></p>
-                        <p>או צליל מחיאות כפיים</p>
-                    </div>
-                    <div class="feedback-item feedback-incorrect">
-                        <div style="font-size: 2em;">💣</div>
-                        <p><strong>תשובה לא נכונה</strong></p>
-                        <p>או צליל אכזבה קלה</p>
-                    </div>
-                </div>
+                <!-- החלק שהוצג בתמונה הוסר מכאן -->
 
                 <button class="interactive-button" onclick="toggleVideo()">🎥 צפייה בסרטון הכנה</button>
             </div>
@@ -547,7 +532,6 @@
                 </div>
 
                 <div class="questions-list">
-                    <!-- תיקון 1: שימוש בפונקציה היציבה selectItem -->
                     <div class="question-item" onclick="selectItem(this)">
                         1. קיו, לא שמת לב שיוגב נפגע מהחברים שלו?
                     </div>
@@ -587,7 +571,6 @@
                     <p><strong>הסבירו לקיו מה באמת קרה ליוגב (כתיבה או הקלטה)</strong></p>
                 </div>
                 <textarea class="student-input" placeholder="ספרו לקיו מה באמת קרה ליוגב ואיך הוא הרגיש..."></textarea>
-                <!-- תיקון 3: חיבור כפתור לפונקציה -->
                 <button class="interactive-button" onclick="recordAudio()">🎤 הקלטה</button>
 
                 <div class="instructions-box">
@@ -596,7 +579,6 @@
                 </div>
                 
                 <div class="questions-list">
-                    <!-- תיקון 1: שימוש בפונקציה היציבה selectItem -->
                     <div class="question-item" onclick="selectItem(this)">
                         1. בהבנת הרגשות שעלו בשיחה
                     </div>
@@ -667,7 +649,6 @@
                     <p><strong>עכשיו כתבו הודעה ברורה לקיו המסבירה את המצב ומבקשת עזרה:</strong></p>
                 </div>
                 <textarea class="student-input" placeholder='דוגמה: "קיו, יוגב מרגיש... ויוני מרגיש... איך אפשר לעזור להם?"'></textarea>
-                <!-- תיקון 3: חיבור כפתור לפונקציה -->
                 <button class="interactive-button" onclick="sendToKio()">📤 שלח לקיו</button>
             </div>
 
